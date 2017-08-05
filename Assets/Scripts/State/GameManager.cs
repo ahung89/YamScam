@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public float remainingTime;
+    public float gameBeginCountdownTime = 3;
     public int goodYamLossLimit = 3;
 
     int numAnimals;
@@ -14,17 +15,35 @@ public class GameManager : MonoBehaviour {
     int yamsLost = 0;
 
     Timer timer;
+    bool gameStarted = false;
 
     void Awake()
     {
+        EventBus.Reset();
         numAnimals = GameObject.FindGameObjectsWithTag("Animal").Length;
         timer = GameObject.Find("Timer").GetComponent<Timer>();
     }
 
     void Update()
     {
-        remainingTime -= Time.deltaTime;
-        timer.UpdateTime(remainingTime);
+        if (gameBeginCountdownTime > 0)
+        {
+            gameBeginCountdownTime -= Time.deltaTime;
+            if (gameBeginCountdownTime >= 0 && Time.deltaTime != 0)
+            {
+                timer.UpdateTime(gameBeginCountdownTime, true);
+            }
+        }
+        else
+        {
+            if (!gameStarted)
+            {
+                EventBus.PublishEvent(new GameStartedEvent());
+                gameStarted = true;
+            }
+            remainingTime -= Time.deltaTime;
+            timer.UpdateTime(remainingTime);
+        }
         if (remainingTime <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -45,3 +64,5 @@ public class GameManager : MonoBehaviour {
         numAnimalsLost++;
     }
 }
+
+public struct GameStartedEvent { }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4316858425466874}
   - component: {fileID: 212582342612765756}
   - component: {fileID: 114130065414777356}
+  - component: {fileID: 114515323405914396}
   m_Layer: 0
   m_Name: Yam Spawner
   m_TagString: Spawner
@@ -61,6 +62,17 @@ MonoBehaviour:
   yam: {fileID: 1732335763756408, guid: e4b3555c4782092479a08e654b6cf8dd, type: 2}
   fuckedYam: {fileID: 1066295159062506, guid: 2a13fab9467af78449083a95ec628f55, type: 2}
   targetBeast: {fileID: 0}
+--- !u!114 &114515323405914396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1131518769705862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d3efee04cbb7548ae4048a1c0988b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212582342612765756
 SpriteRenderer:
   m_ObjectHideFlags: 1

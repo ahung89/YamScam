@@ -52,7 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce989c9c30d2cd949b4f5f0ab1f42955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingTime: 30
+  remainingTime: 10
+  gameBeginCountdownTime: 4
   goodYamLossLimit: 0
 --- !u!114 &114900468977731370
 MonoBehaviour:

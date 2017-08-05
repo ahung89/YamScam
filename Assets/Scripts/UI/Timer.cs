@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour {
     public float urgencyScale;
     public int urgencyThreshold;
+    public int gameStartUrgencyThreshold = 5;
 
     int displayedTime;
     float remainingTime;
@@ -19,22 +20,34 @@ public class Timer : MonoBehaviour {
         displayedTime = int.Parse(text.text);
     }
 
-    public void UpdateTime(float remainingTime)
+    public void UpdateTime (float remainingTime, bool gameStartCountdown = false)
     {
         this.remainingTime = remainingTime;
         int remainingIntTime = (int)Mathf.Floor(this.remainingTime);
         float remainingFract = remainingTime - remainingIntTime;
-        remainingIntTime++;
+        int threshold = gameStartCountdown ? gameStartUrgencyThreshold : urgencyThreshold;
+        remainingIntTime += gameStartCountdown ? 0 : 1;
 
         if (remainingIntTime != displayedTime)
         {
             displayedTime = remainingIntTime;
-            text.text = remainingIntTime.ToString();
+            if (gameStartCountdown)
+            {
+                text.text = remainingIntTime == 0 ? "GO" : remainingIntTime.ToString();
+            }
+            else if (remainingIntTime != 0)
+            {
+                text.text = remainingIntTime.ToString();
+            }
         }
-        if (remainingIntTime <= urgencyThreshold)
+        if (remainingIntTime <= threshold)
         {
             float scale = Mathf.Lerp(1, urgencyScale, remainingFract);
             rt.localScale = new Vector2(scale, scale);
+        }
+        else
+        {
+            rt.localScale = new Vector2(1, 1);
         }
     }
 }

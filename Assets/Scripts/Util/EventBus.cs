@@ -108,4 +108,11 @@ public static class EventBus {
             go.GetComponent<EventSubscriber>().PublishEvent(e);
         }
     }
+
+    public static void Reset()
+    {
+        events.Clear();
+        eventTypeBeingProcessed = null;
+        cleanupList.Clear();
+    }
 }

@@ -23,7 +23,8 @@ public class YamSpawner : MonoBehaviour {
 
     private float yamWaitSeconds;
 
-    void Awake()
+    [SubscribeGlobal]
+    public void HandleGameStart(GameStartedEvent e)
     {
         yamWaitSeconds = 1 / yamsPerSecond;
         StartCoroutine(SpawnYam());
