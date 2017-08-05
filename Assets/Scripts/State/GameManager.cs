@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
     public float remainingTime;
-    public int goodYamLossLimit;
+    public int goodYamLossLimit = 3;
 
+    int numAnimals;
     int numAnimalsLost = 0;
     int totalAnimalCount = 0;
     int yamsLost = 0;
 
     void Awake()
     {
-        numAnimalsLost = GameObject.FindGameObjectsWithTag("Animal").Length;
+        numAnimals = GameObject.FindGameObjectsWithTag("Animal").Length;
     }
 
     void Update()
@@ -29,6 +30,7 @@ public class ScoreManager : MonoBehaviour {
     public void IncrementGoodYamLost()
     {
         yamsLost++;
+        Debug.Log("good yam lost dood :(");
         if (yamsLost == goodYamLossLimit)
         {
             Debug.Log("YOU LOST YO");

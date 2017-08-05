@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212413879093660864}
   - component: {fileID: 50044772814366138}
   - component: {fileID: 61455834753567080}
+  - component: {fileID: 114196498160309878}
   m_Layer: 0
   m_Name: Yam
   m_TagString: Yam
@@ -87,6 +88,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &114196498160309878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732335763756408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4014d6abc693a240a4f66f99834743c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212413879093660864
 SpriteRenderer:
   m_ObjectHideFlags: 1

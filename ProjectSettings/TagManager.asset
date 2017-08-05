@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Yam
   - Animal
+  - BadYam
   layers:
   - Default
   - TransparentFX

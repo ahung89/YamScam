@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animal : MonoBehaviour {
+public class Saw : MonoBehaviour {
 
-	void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D (Collider2D other)
     {
-        if (other.tag == "Yam")
+        if (other.tag == "BadYam")
         {
             Destroy(other.gameObject);
         }
-        else if (other.tag == "BadYam")
+        else if (other.tag == "Yam")
         {
             Destroy(other.gameObject);
             // Trigger effect/deduct health?
