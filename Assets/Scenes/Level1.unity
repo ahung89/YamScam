@@ -454,6 +454,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &451244922 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1489102067682814, guid: 79a54c7145cd5cf4ca7b6cede8060f36,
+    type: 2}
+  m_PrefabInternal: {fileID: 1715182694}
 --- !u!224 &709636079 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224909245065727162, guid: dad4c89792b23d8449dfdce685247e35,
@@ -579,6 +584,11 @@ Prefab:
       propertyPath: m_Name
       value: Left Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 114130065414777356, guid: 224f5eaee358e6247a3e7cf2484c133e,
+        type: 2}
+      propertyPath: targetBeast
+      value: 
+      objectReference: {fileID: 451244922}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 224f5eaee358e6247a3e7cf2484c133e, type: 2}
   m_IsPrefabParent: 0
@@ -614,9 +624,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -216}
-  m_SizeDelta: {x: 280, y: -432.1}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 23.6}
+  m_SizeDelta: {x: 280, y: 47.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139369242
 MonoBehaviour:
@@ -630,7 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.659}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -686,6 +696,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1274820415 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1489102067682814, guid: 79a54c7145cd5cf4ca7b6cede8060f36,
+    type: 2}
+  m_PrefabInternal: {fileID: 1838021182}
 --- !u!4 &1420127694 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36,
@@ -734,6 +749,11 @@ Prefab:
       propertyPath: m_Name
       value: Right Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 114130065414777356, guid: 224f5eaee358e6247a3e7cf2484c133e,
+        type: 2}
+      propertyPath: targetBeast
+      value: 
+      objectReference: {fileID: 1274820415}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 224f5eaee358e6247a3e7cf2484c133e, type: 2}
   m_IsPrefabParent: 0

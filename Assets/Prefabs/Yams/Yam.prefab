@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50044772814366138}
   - component: {fileID: 61455834753567080}
   - component: {fileID: 114196498160309878}
+  - component: {fileID: 114888906419742868}
   m_Layer: 0
   m_Name: Yam
   m_TagString: Yam
@@ -99,6 +100,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4014d6abc693a240a4f66f99834743c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114888906419742868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732335763756408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52456e6678507b24eb7127c3b59bf899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventInProgress: 0
 --- !u!212 &212413879093660864
 SpriteRenderer:
   m_ObjectHideFlags: 1

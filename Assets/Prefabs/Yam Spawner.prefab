@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114130065414777356}
   m_Layer: 0
   m_Name: Yam Spawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,8 +54,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yamsPerSecond: 2
   badYamSpawnChance: 30
+  elevationSpeed: 0
+  flyVelocity: {x: 0, y: 0}
+  timeFlyScale: 0
+  circleFlightSpeed: 0
   yam: {fileID: 1732335763756408, guid: e4b3555c4782092479a08e654b6cf8dd, type: 2}
   fuckedYam: {fileID: 1066295159062506, guid: 2a13fab9467af78449083a95ec628f55, type: 2}
+  targetBeast: {fileID: 0}
 --- !u!212 &212582342612765756
 SpriteRenderer:
   m_ObjectHideFlags: 1

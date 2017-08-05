@@ -12,8 +12,29 @@ public class Animal : MonoBehaviour {
         }
         else if (other.tag == "BadYam")
         {
-            Destroy(other.gameObject);
-            // Trigger effect/deduct health?
+            HandleAnimalDeath();
+        }
+    }
+
+    void HandleAnimalDeath()
+    {
+        GameObject[] yams = GameObject.FindGameObjectsWithTag("Yam");
+        GameObject[] badYams = GameObject.FindGameObjectsWithTag("BadYam");
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+
+        for (int i = 0; i < yams.Length; i++)
+        {
+            yams[i].GetComponent<Yam>().HandleBeastKilled(gameObject);
+        }
+
+        for (int i = 0; i < badYams.Length; i++)
+        {
+            badYams[i].GetComponent<Yam>().HandleBeastKilled(gameObject);
+        }
+
+        for (int i = 0; i < spawners.Length; i++)
+        {
+            spawners[i].GetComponent<YamSpawner>().HandleBeastKilled(gameObject);
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Yam : MonoBehaviour {
     private Rigidbody2D rb2d;
+    private GameObject targetBeast;
 
     // For elevated yams
     private Vector2 elevatedVelocity;
@@ -56,5 +57,18 @@ public class Yam : MonoBehaviour {
         this.circleFlightSpeed = circleFlightSpeed;
         this.flyStartTime = Time.time;
         rb2d.gravityScale = 0;
+    }
+
+    public void SetTargetBeast(GameObject targetBeast)
+    {
+        this.targetBeast = targetBeast;
+    }
+
+    public void HandleBeastKilled(GameObject killedAnimal)
+    {
+        if (targetBeast == killedAnimal)
+        {
+            Destroy(gameObject);
+        }
     }
 }

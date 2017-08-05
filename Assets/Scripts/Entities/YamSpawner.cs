@@ -19,6 +19,7 @@ public class YamSpawner : MonoBehaviour {
 
     public GameObject yam;
     public GameObject fuckedYam;
+    public GameObject targetBeast;
 
     private float yamWaitSeconds;
 
@@ -28,25 +29,36 @@ public class YamSpawner : MonoBehaviour {
         StartCoroutine(SpawnYam());
     }
 
-    IEnumerator SpawnYam()
+    IEnumerator SpawnYam ()
     {
         yield return new WaitForSeconds(yamWaitSeconds);
         GameObject yamToSpawn = Random.Range(0, 100) < badYamSpawnChance ? fuckedYam : yam;
         GameObject spawnedYam = Instantiate(yamToSpawn, transform.position, Quaternion.identity);
+        Yam datYam = spawnedYam.GetComponent<Yam>();
 
         if (elevationSpeed != 0)
         {
-            spawnedYam.GetComponent<Yam>().Elevate(elevationSpeed);
+            datYam.Elevate(elevationSpeed);
         }
         else if (flyVelocity != Vector2.zero)
         {
-            spawnedYam.GetComponent<Yam>().MakeFly(flyVelocity, timeFlyScale);
+            datYam.MakeFly(flyVelocity, timeFlyScale);
         }
         else if (circleFlightSpeed != 0)
         {
-            spawnedYam.GetComponent<Yam>().MakeFlyCircle(circleFlightSpeed);
+            datYam.MakeFlyCircle(circleFlightSpeed);
         }
 
+        datYam.SetTargetBeast(targetBeast);
+
         StartCoroutine(SpawnYam());
+    }
+
+    public void HandleBeastKilled (GameObject killedAnimal)
+    {
+        if (targetBeast == killedAnimal)
+        {
+            Destroy(gameObject);
+        }
     }
 }
