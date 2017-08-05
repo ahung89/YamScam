@@ -71,4 +71,9 @@ public class Yam : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

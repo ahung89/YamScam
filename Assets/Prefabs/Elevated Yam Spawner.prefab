@@ -73,6 +73,18 @@ MonoBehaviour:
   yam: {fileID: 1732335763756408, guid: e4b3555c4782092479a08e654b6cf8dd, type: 2}
   fuckedYam: {fileID: 1066295159062506, guid: 2a13fab9467af78449083a95ec628f55, type: 2}
   targetBeast: {fileID: 0}
+  easyFuckedYams:
+  - {fileID: 21300000, guid: 122f16f85c50ee34c86571e8c1649819, type: 3}
+  - {fileID: 21300018, guid: 122f16f85c50ee34c86571e8c1649819, type: 3}
+  - {fileID: 21300032, guid: 122f16f85c50ee34c86571e8c1649819, type: 3}
+  mediumFuckedYams:
+  - {fileID: 21300000, guid: a1429d9dbf59f204aa9e8cd6e7017cbf, type: 3}
+  - {fileID: 21300004, guid: a1429d9dbf59f204aa9e8cd6e7017cbf, type: 3}
+  - {fileID: 21300010, guid: a1429d9dbf59f204aa9e8cd6e7017cbf, type: 3}
+  difficultFuckedYams:
+  - {fileID: 21300000, guid: 27c05ba86c2d8144cabd7a14c0f96841, type: 3}
+  - {fileID: 21300018, guid: 27c05ba86c2d8144cabd7a14c0f96841, type: 3}
+  - {fileID: 21300012, guid: 27c05ba86c2d8144cabd7a14c0f96841, type: 3}
 --- !u!212 &212125725922337124
 SpriteRenderer:
   m_ObjectHideFlags: 1

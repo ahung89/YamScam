@@ -21,7 +21,17 @@ public class YamSpawner : MonoBehaviour {
     public GameObject fuckedYam;
     public GameObject targetBeast;
 
+    public List<Sprite> easyFuckedYams;
+    public List<Sprite> mediumFuckedYams;
+    public List<Sprite> difficultFuckedYams;
+
     private float yamWaitSeconds;
+    private GameManager gameManager;
+
+    void Awake()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
 
     [SubscribeGlobal]
     public void HandleGameStart(GameStartedEvent e)
@@ -36,6 +46,11 @@ public class YamSpawner : MonoBehaviour {
         GameObject yamToSpawn = Random.Range(0, 100) < badYamSpawnChance ? fuckedYam : yam;
         GameObject spawnedYam = Instantiate(yamToSpawn, transform.position, Quaternion.identity);
         Yam datYam = spawnedYam.GetComponent<Yam>();
+
+        if (yamToSpawn == fuckedYam)
+        {
+            DecorateFuckedYam(datYam.gameObject);
+        }
 
         if (elevationSpeed != 0)
         {
@@ -53,6 +68,26 @@ public class YamSpawner : MonoBehaviour {
         datYam.SetTargetBeast(targetBeast);
 
         StartCoroutine(SpawnYam());
+    }
+
+    void DecorateFuckedYam(GameObject yizzam)
+    {
+        List<Sprite> yamSprites;
+        
+        if (gameManager.difficulty == 0)
+        {
+            yamSprites = easyFuckedYams;
+        }
+        else if (gameManager.difficulty == 1)
+        {
+            yamSprites = mediumFuckedYams;
+        }
+        else
+        {
+            yamSprites = difficultFuckedYams;
+        }
+
+        yizzam.GetComponent<SpriteRenderer>().sprite = yamSprites[Random.Range(0, yamSprites.Count)];
     }
 
     public void HandleBeastKilled (GameObject killedAnimal)

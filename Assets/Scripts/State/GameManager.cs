@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public float remainingTime;
     public float gameBeginCountdownTime = 3;
     public int goodYamLossLimit = 3;
+    public int difficulty;
 
     int numAnimals;
     int numAnimalsLost = 0;
