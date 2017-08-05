@@ -13,6 +13,8 @@ public class Yam : MonoBehaviour {
     private float timeFlyScale;
     private float flyStartTime;
 
+    private float circleFlightSpeed;
+
     void Awake ()
     {
     }
@@ -24,6 +26,11 @@ public class Yam : MonoBehaviour {
             float newX = flyVelocity.x;
             float newY = flyVelocity.y * Mathf.Sin((Time.time - flyStartTime) * timeFlyScale);
             rb2d.velocity = new Vector2(newX, newY);
+        }
+        else if (circleFlightSpeed != 0)
+        {
+            rb2d.velocity = new Vector2(circleFlightSpeed * Mathf.Cos((Time.time - flyStartTime) * 1.5f),
+                circleFlightSpeed * Mathf.Sin((Time.time - flyStartTime) * 1.5f));
         }
     }
 
@@ -40,6 +47,14 @@ public class Yam : MonoBehaviour {
         this.flyVelocity = flyVelocity;
         this.timeFlyScale = timeFlyScale;
         flyStartTime = Time.time;
+        rb2d.gravityScale = 0;
+    }
+
+    public void MakeFlyCircle(float circleFlightSpeed)
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        this.circleFlightSpeed = circleFlightSpeed;
+        this.flyStartTime = Time.time;
         rb2d.gravityScale = 0;
     }
 }

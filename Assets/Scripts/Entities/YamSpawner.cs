@@ -14,6 +14,9 @@ public class YamSpawner : MonoBehaviour {
     public Vector2 flyVelocity;
     public float timeFlyScale;
 
+    // For circle yams
+    public float circleFlightSpeed;
+
     public GameObject yam;
     public GameObject fuckedYam;
 
@@ -38,6 +41,10 @@ public class YamSpawner : MonoBehaviour {
         else if (flyVelocity != Vector2.zero)
         {
             spawnedYam.GetComponent<Yam>().MakeFly(flyVelocity, timeFlyScale);
+        }
+        else if (circleFlightSpeed != 0)
+        {
+            spawnedYam.GetComponent<Yam>().MakeFlyCircle(circleFlightSpeed);
         }
 
         StartCoroutine(SpawnYam());
