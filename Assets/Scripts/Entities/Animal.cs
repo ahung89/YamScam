@@ -7,12 +7,15 @@ public class Animal : MonoBehaviour {
     public Sprite waitFrame;
     public Sprite munchFrame;
     public float munchTime;
+    public float deathScreenShakeDuration = .3f;
 
     SpriteRenderer rendera;
+    GameObject manager;
 
     void Awake()
     {
         rendera = GetComponent<SpriteRenderer>();
+        manager = GameObject.Find("Game Manager");
     }
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -38,6 +41,7 @@ public class Animal : MonoBehaviour {
         GameObject[] badYams = GameObject.FindGameObjectsWithTag("BadYam");
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
         GameObject.Find("Lives").GetComponent<IconStrip>().Mark();
+        manager.GetComponent<ScreenShake>().ShakeScreen(deathScreenShakeDuration);
 
         for (int i = 0; i < yams.Length; i++)
         {

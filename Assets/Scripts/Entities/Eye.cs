@@ -14,7 +14,7 @@ public class Eye : MonoBehaviour {
 	
 	void Update () {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 vec = mousePos - rootPos;
+        Vector2 vec = mousePos - (Vector2)transform.parent.position;
         float dist = Vector2.Distance(transform.parent.position, mousePos);
 
         if (dist < radius)

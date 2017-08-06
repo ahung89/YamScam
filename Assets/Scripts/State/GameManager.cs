@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public float gameBeginCountdownTime = 3;
     public int goodYamLossLimit = 3;
     public int difficulty;
+    public float fadeAlphaPerSec;
 
     int numAnimals;
     int numAnimalsLost = 0;
@@ -17,16 +19,55 @@ public class GameManager : MonoBehaviour {
 
     Timer timer;
     bool gameStarted = false;
+    bool fadeInFinished = false;
+    bool gameEnded = false;
+    float fadeStartTime;
+    Image fadePanel;
 
     void Awake()
     {
+        Debug.Log("scene loaded");
         EventBus.Reset();
         numAnimals = GameObject.FindGameObjectsWithTag("Animal").Length;
         timer = GameObject.Find("Timer").GetComponent<Timer>();
+        fadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
+        fadeStartTime = Time.time;
+        StartCoroutine(FadeIn());
+    }
+
+    IEnumerator FadeIn ()
+    {
+        fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, Mathf.Lerp(1, 0, (Time.time - fadeStartTime) * fadeAlphaPerSec));
+        yield return null;
+        if (fadePanel.color.a > 0)
+        {
+            StartCoroutine(FadeIn());
+        }
+        else
+        {
+            fadeInFinished = true;
+        }
+    }
+
+    IEnumerator FadeOut ()
+    {
+        fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, Mathf.Lerp(0, 1, (Time.time - fadeStartTime) * fadeAlphaPerSec));
+        yield return null;
+        if (fadePanel.color.a < 1)
+        {
+            StartCoroutine(FadeOut());
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     void Update()
     {
+        if (gameEnded)
+            return;
+
         if (gameBeginCountdownTime > 0)
         {
             gameBeginCountdownTime -= Time.deltaTime;
@@ -45,9 +86,12 @@ public class GameManager : MonoBehaviour {
             remainingTime -= Time.deltaTime;
             timer.UpdateTime(remainingTime);
         }
+
         if (remainingTime <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            gameEnded = true;
+            fadeStartTime = Time.time;
+            StartCoroutine(FadeOut());
         }
     }
 

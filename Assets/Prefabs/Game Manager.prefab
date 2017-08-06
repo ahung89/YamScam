@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4086115361892808}
   - component: {fileID: 114527171326446704}
   - component: {fileID: 114900468977731370}
+  - component: {fileID: 114389238993704580}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114389238993704580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127219144879752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40c0c4d53fe4f14883ed1438fdb99c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenShakeAmount: 0.35
+  timeBetweenShakes: 0.01
+  shakeDuration: 0.3
 --- !u!114 &114527171326446704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,6 +70,8 @@ MonoBehaviour:
   remainingTime: 10
   gameBeginCountdownTime: 4
   goodYamLossLimit: 0
+  difficulty: 0
+  fadeAlphaPerSec: 1
 --- !u!114 &114900468977731370
 MonoBehaviour:
   m_ObjectHideFlags: 1

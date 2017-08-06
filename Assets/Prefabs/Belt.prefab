@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4835945333855978}
   - component: {fileID: 331549182877215900}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: end white
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4485351453436766}
   - component: {fileID: 212319027043615306}
   - component: {fileID: 331945949844476148}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltMiddle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4587106865675224}
   - component: {fileID: 212988798021566982}
   - component: {fileID: 331279601968826360}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltMiddle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4573282781012300}
   - component: {fileID: 212549103970919268}
   - component: {fileID: 114308713491559460}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ConveyorBeltLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4798964730416810}
   - component: {fileID: 212701850592476670}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4017769603368160}
   - component: {fileID: 212139958453926130}
   - component: {fileID: 331307755105461826}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltMiddle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4113756430690448}
   - component: {fileID: 212411071391342584}
   - component: {fileID: 331719779939208508}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltMiddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4760957376887326}
   - component: {fileID: 212464250066022066}
   - component: {fileID: 331255158583286022}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltMiddle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 61313174490627356}
   - component: {fileID: 114848833212016030}
   - component: {fileID: 50709266046155654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Belt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4621605118533570}
   - component: {fileID: 212472947603549858}
   - component: {fileID: 331853470497523270}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BeltMiddle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
