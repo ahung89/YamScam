@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6081887a4eb8df74086bface2685435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urgencyScale: 3
+  urgencyScale: 6
   urgencyThreshold: 5
   gameStartUrgencyThreshold: 3
 --- !u!114 &114092186666029984
@@ -477,9 +477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf01b408b598a646b3360c80f52bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 10
-  scaleAmount: 0.5
-  wiggleDuration: 0.75
+  rotationAmount: 15
+  scaleAmount: 1
+  wiggleDuration: 1
   rotationFrequencyMultiplier: 30
 --- !u!114 &114384206950567876
 MonoBehaviour:
@@ -492,9 +492,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf01b408b598a646b3360c80f52bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 10
-  scaleAmount: 0.5
-  wiggleDuration: 0.75
+  rotationAmount: 15
+  scaleAmount: 1
+  wiggleDuration: 1
   rotationFrequencyMultiplier: 30
 --- !u!114 &114384274949469086
 MonoBehaviour:
@@ -638,9 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf01b408b598a646b3360c80f52bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 10
-  scaleAmount: 0.5
-  wiggleDuration: 0.75
+  rotationAmount: 15
+  scaleAmount: 1
+  wiggleDuration: 1
   rotationFrequencyMultiplier: 30
 --- !u!114 &114566440679445066
 MonoBehaviour:
@@ -691,9 +691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf01b408b598a646b3360c80f52bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 10
-  scaleAmount: 0.5
-  wiggleDuration: 0.75
+  rotationAmount: 15
+  scaleAmount: 1
+  wiggleDuration: 1
   rotationFrequencyMultiplier: 30
 --- !u!114 &114711762815803798
 MonoBehaviour:
@@ -722,9 +722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf01b408b598a646b3360c80f52bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 10
-  scaleAmount: 0.5
-  wiggleDuration: 0.75
+  rotationAmount: 15
+  scaleAmount: 1
+  wiggleDuration: 1
   rotationFrequencyMultiplier: 30
 --- !u!114 &114839177903455046
 MonoBehaviour:
@@ -758,9 +758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf01b408b598a646b3360c80f52bb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationAmount: 10
-  scaleAmount: 0.5
-  wiggleDuration: 0.75
+  rotationAmount: 15
+  scaleAmount: 1
+  wiggleDuration: 1
   rotationFrequencyMultiplier: 30
 --- !u!222 &222332083773539576
 CanvasRenderer:
@@ -1015,8 +1015,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 28.17}
-  m_SizeDelta: {x: 0, y: 56.35}
+  m_AnchoredPosition: {x: 0, y: 37.8}
+  m_SizeDelta: {x: 0, y: 75.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224855725107473336
 RectTransform:

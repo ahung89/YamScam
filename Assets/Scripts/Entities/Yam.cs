@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Yam : MonoBehaviour {
     public GameObject explosion;
+    public bool destroyed = false;
 
     private Rigidbody2D rb2d;
     private GameObject targetBeast;
@@ -77,6 +78,7 @@ public class Yam : MonoBehaviour {
 
     public void Destroy()
     {
+        destroyed = true;
         Destroy(gameObject);
     }
 }

@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missedSpeed: 0.5
+  joinSpeed: 0.25
   timeToImpact: 0.1
   explosionPrefab: {fileID: 1557544881763272, guid: b733d7de19c968c48b7a53d9c9952a1a,
     type: 2}

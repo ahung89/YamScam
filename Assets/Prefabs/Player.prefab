@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d516fda78f93ef47b97bde10011ab4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.25
+  radius: 0.7
 --- !u!114 &114450781710782744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d516fda78f93ef47b97bde10011ab4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.25
+  radius: 0.7
 --- !u!212 &212025757270108238
 SpriteRenderer:
   m_ObjectHideFlags: 1

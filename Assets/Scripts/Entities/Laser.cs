@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour {
 
     public float missedSpeed;
+    public float joinSpeed;
     public float timeToImpact;
     public GameObject explosionPrefab;
     GameObject target;
@@ -65,7 +66,7 @@ public class Laser : MonoBehaviour {
     }
 
 	void Update () {
-        if (lastFramePos == (Vector2)transform.position)
+        if (lastFramePos == (Vector2)transform.position && target == null)
         {
             Destroy(gameObject);
         }
@@ -73,7 +74,7 @@ public class Laser : MonoBehaviour {
         lastFramePos = transform.position;
         if (!joined)
         {
-            transform.position += (Vector3)(missedSpeed * joinDir);
+            transform.position += (Vector3)(joinSpeed * joinDir);
             if (Vector2.Distance(transform.position, joinPosition) < .4f)
             {
                 if (!missed)
@@ -92,11 +93,11 @@ public class Laser : MonoBehaviour {
 
         if (target != null)
         {
-            if (initialPosition == targetPosition)
+            if (initialPosition == (Vector2)target.transform.position)
             {
                 Destroy(gameObject);
             }
-            transform.position = Vector2.Lerp(initialPosition, targetPosition, (Time.time - birthTime) /timeToImpact);
+            transform.position = Vector2.Lerp(initialPosition, target.transform.position, (Time.time - birthTime) /timeToImpact);
         }
         else
         {
@@ -114,12 +115,13 @@ public class Laser : MonoBehaviour {
         {
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            other.GetComponent<Yam>().Destroy();
+            Yam yam = other.GetComponent<Yam>();
 
-            if (target.tag == "Yam")
+            if (target.tag == "Yam" && !yam.destroyed)
             {
                 GameObject.Find("Lost Yams").GetComponent<IconStrip>().Mark();
             }
+            yam.Destroy();
         }
     }
 }
