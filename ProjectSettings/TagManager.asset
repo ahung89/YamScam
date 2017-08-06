@@ -8,6 +8,8 @@ TagManager:
   - Animal
   - BadYam
   - Spawner
+  - Laser
+  - Saw
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Wall
   - Conveyor Belt
   - Laser
-  - 
+  - Saw
   - 
   - 
   - 
@@ -42,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Saw
+    uniqueID: 4071373617
+    locked: 0
   - name: Belt
     uniqueID: 3421367615
     locked: 0

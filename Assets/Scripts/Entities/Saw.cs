@@ -4,16 +4,41 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour {
 
-    void OnTriggerEnter2D (Collider2D other)
+    public Vector2 dir;
+    public float speed;
+    public float knockbackSpeed;
+    public float knockbackDuration;
+
+    bool knockbackInProgress;
+    float knockbackStartTime;
+
+    void Update()
     {
-        if (other.tag == "BadYam")
+        if (!knockbackInProgress)
         {
-            Destroy(other.gameObject);
+            transform.position = transform.position + speed * (Vector3)dir * Time.deltaTime;
         }
-        else if (other.tag == "Yam")
+        else
         {
-            Destroy(other.gameObject);
-            // Trigger effect/deduct health?
+            if (Time.time > knockbackStartTime + knockbackDuration)
+            {
+                knockbackInProgress = false;
+            }
+            else
+            {
+                transform.position = transform.position - knockbackSpeed * (Vector3)dir * Time.deltaTime;
+            }
         }
+
+        Vector2 ll = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 ur = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, ll.x, ur.x), Mathf.Clamp(transform.position.y, ll.y, ur.y));
+    }
+
+    public void KnockBack()
+    {
+        knockbackInProgress = true;
+        knockbackStartTime = Time.time;
     }
 }

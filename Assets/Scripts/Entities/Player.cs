@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-            if (hit.transform == null || (hit.collider.tag != "BadYam" && hit.collider.tag != "Yam"))
+            if (hit.transform == null || (hit.collider.tag != "BadYam" && hit.collider.tag != "Yam" && hit.collider.tag != "Saw"))
             {
                 GameObject left = Instantiate(laserPrefab, leftEye.transform.position, Quaternion.identity);
                 GameObject right = Instantiate(laserPrefab, rightEye.transform.position, Quaternion.identity);
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
                 left.GetComponent<Laser>().SetMissDir(missDir, joinPos, true, right);
                 right.GetComponent<Laser>().SetMissDir(missDir, joinPos, false);
             }
-            else if (hit.transform != null && hit.collider.tag == "BadYam")
+            else if (hit.transform != null && hit.collider.tag == "BadYam" || hit.collider.tag == "Yam" || hit.collider.tag == "Saw")
             {
                 GameObject left = Instantiate(laserPrefab, leftEye.transform.position, Quaternion.identity);
                 GameObject right = Instantiate(laserPrefab, rightEye.transform.position, Quaternion.identity);

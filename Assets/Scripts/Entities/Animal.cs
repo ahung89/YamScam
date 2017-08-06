@@ -22,6 +22,7 @@ public class Animal : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.tag == "Yam")
         {
             Destroy(other.gameObject);
@@ -33,6 +34,10 @@ public class Animal : MonoBehaviour {
             }
         }
         else if (other.tag == "BadYam")
+        {
+            HandleAnimalDeath();
+        }
+        else if (other.tag == "Saw")
         {
             HandleAnimalDeath();
         }
