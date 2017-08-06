@@ -9,7 +9,7 @@ public class Eye : MonoBehaviour {
     Vector2 rootPos;
 
 	void Start () {
-        rootPos = transform.position;		
+        rootPos = transform.localPosition;
 	}
 	
 	void Update () {
@@ -17,13 +17,15 @@ public class Eye : MonoBehaviour {
         Vector2 vec = mousePos - (Vector2)transform.parent.position;
         float dist = Vector2.Distance(transform.parent.position, mousePos);
 
+
         if (dist < radius)
         {
             transform.position = mousePos;
         }
         else
         {
-            transform.position = rootPos + radius * vec.normalized;
+
+            transform.localPosition = rootPos + radius * vec.normalized;
         }
 	}
 }

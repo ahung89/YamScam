@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
-        Debug.Log("scene loaded");
         EventBus.Reset();
         numAnimals = GameObject.FindGameObjectsWithTag("Animal").Length;
         timer = GameObject.Find("Timer").GetComponent<Timer>();
