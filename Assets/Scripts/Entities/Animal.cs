@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class Animal : MonoBehaviour {
 
+    public Sprite waitFrame;
+    public Sprite munchFrame;
+    public float munchTime;
+
+    SpriteRenderer rendera;
+
+    void Awake()
+    {
+        rendera = GetComponent<SpriteRenderer>();
+    }
+
 	void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Yam")
         {
             Destroy(other.gameObject);
+            if (rendera.sprite != munchFrame)
+            {
+                rendera.sprite = munchFrame;
+                Invoke("Unmunch", munchTime);
+            }
         }
         else if (other.tag == "BadYam")
         {
@@ -37,5 +53,10 @@ public class Animal : MonoBehaviour {
         {
             spawners[i].GetComponent<YamSpawner>().HandleBeastKilled(gameObject);
         }
+    }
+
+    void Unmunch()
+    {
+        rendera.sprite = waitFrame;
     }
 }

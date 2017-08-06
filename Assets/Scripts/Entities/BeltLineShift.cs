@@ -17,8 +17,6 @@ public class BeltLineShift : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(Time.time % .25f);
-        rendera.material.mainTexture.wrapMode = TextureWrapMode.Repeat;
         rendera.material.SetFloat("_UnscaledTime", Time.time * beltSpeed);
     }
 }
