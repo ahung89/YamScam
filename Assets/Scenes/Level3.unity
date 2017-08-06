@@ -108,6 +108,11 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &390838158 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1489102067682814, guid: 79a54c7145cd5cf4ca7b6cede8060f36,
+    type: 2}
+  m_PrefabInternal: {fileID: 1031319170}
 --- !u!1001 &501650831
 Prefab:
   m_ObjectHideFlags: 0
@@ -394,7 +399,7 @@ Prefab:
         type: 2}
       propertyPath: targetBeast
       value: 
-      objectReference: {fileID: 2119431130}
+      objectReference: {fileID: 390838158}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c751e31d914119549add6f34ed4c06ce, type: 2}
   m_IsPrefabParent: 0

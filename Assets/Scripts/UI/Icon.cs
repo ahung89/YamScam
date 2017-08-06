@@ -9,6 +9,7 @@ public class Icon : MonoBehaviour {
     public float scaleAmount;
     public float wiggleDuration;
     public float rotationFrequencyMultiplier;
+    public Sprite badFrame;
 
     bool marked;
     bool wiggling = false;
@@ -26,7 +27,8 @@ public class Icon : MonoBehaviour {
             return false;
 
         marked = true;
-        GetComponent<Image>().color = Color.red;
+        transform.Find("Img").GetComponent<Image>().sprite = badFrame;
+        //GetComponent<Image>().color = Color.red;
         wiggling = true;
         wiggleStartTime = Time.time;
         return true;

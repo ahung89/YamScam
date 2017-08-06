@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
     public GameObject rightEye;
     public float joinDistance = 3;
 
+    public AudioSource laserSound;
+
     private GameManager gameManager;
 
     private void Awake ()

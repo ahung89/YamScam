@@ -13,6 +13,12 @@ public class Timer : MonoBehaviour {
     RectTransform rt;
     Text text;
 
+    public List<AudioSource> beeps;
+    public List<AudioSource> songs;
+
+    public AudioSource winSound;
+    public AudioSource loseSound;
+
     private void Awake ()
     {
         rt = GetComponent<RectTransform>();

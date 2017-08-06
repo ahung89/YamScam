@@ -114,9 +114,9 @@ MonoBehaviour:
   fuckedYam: {fileID: 1066295159062506, guid: 2a13fab9467af78449083a95ec628f55, type: 2}
   targetBeast: {fileID: 0}
   easyFuckedYams:
-  - {fileID: 21300000, guid: 122f16f85c50ee34c86571e8c1649819, type: 3}
-  - {fileID: 21300018, guid: 122f16f85c50ee34c86571e8c1649819, type: 3}
-  - {fileID: 21300032, guid: 122f16f85c50ee34c86571e8c1649819, type: 3}
+  - {fileID: 21300000, guid: 11cd02422f6345a4bbc7e3fb50148015, type: 3}
+  - {fileID: 21300002, guid: c68dde110809e98409ebb2ce30926f1c, type: 3}
+  - {fileID: 21300002, guid: 2c069908d5cb3684ab1cc30001f6b533, type: 3}
   mediumFuckedYams:
   - {fileID: 21300000, guid: a1429d9dbf59f204aa9e8cd6e7017cbf, type: 3}
   - {fileID: 21300004, guid: a1429d9dbf59f204aa9e8cd6e7017cbf, type: 3}
