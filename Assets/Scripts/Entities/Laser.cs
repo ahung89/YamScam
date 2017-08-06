@@ -116,10 +116,6 @@ public class Laser : MonoBehaviour {
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Yam yam = other.GetComponent<Yam>();
-            if (yam != null)
-            {
-                yam.Destroy();
-            }
 
             if (target.tag == "Yam" && !yam.destroyed)
             {
@@ -129,6 +125,10 @@ public class Laser : MonoBehaviour {
             if (target.tag == "Saw")
             {
                 target.GetComponent<Saw>().KnockBack();
+            }
+            if (yam != null)
+            {
+                yam.Destroy();
             }
         }
     }
