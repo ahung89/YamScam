@@ -14,11 +14,11 @@ public class IconStrip : MonoBehaviour {
 	public void Mark()
     {
         bool marked = false;
-        int i = icons.Length - 1;
-        while (!marked && i >= 0)
+        int i = 0;
+        while (!marked && i < icons.Length)
         {
             marked = icons[i].Mark();
-            i--;
+            i++;
         }
     }
 }

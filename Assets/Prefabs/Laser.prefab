@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 82425924921169202}
   - component: {fileID: 114137818079966478}
   - component: {fileID: 61514630328047980}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Laser
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4103172157068606}
   - component: {fileID: 198584003452231684}
   - component: {fileID: 199229456769899358}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4135986271378788}
   - component: {fileID: 198816969178309662}
   - component: {fileID: 199097255119602492}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SparkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

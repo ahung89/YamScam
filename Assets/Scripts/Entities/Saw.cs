@@ -8,14 +8,19 @@ public class Saw : MonoBehaviour {
     public float speed;
     public float knockbackSpeed;
     public float knockbackDuration;
+    public float rotationSpeed;
 
     bool knockbackInProgress;
     float knockbackStartTime;
     bool gameStarted = false;
+    float accumulatedRotationZ = 0;
+
+    GameObject sawParent;
 
     void Awake()
     {
         speed *= GameObject.Find("Game Manager").GetComponent<GameManager>().difficultyMultiplier;
+        sawParent = transform.parent.gameObject;
     }
 
     [SubscribeGlobal]
@@ -26,6 +31,9 @@ public class Saw : MonoBehaviour {
 
     void Update()
     {
+        accumulatedRotationZ += Time.deltaTime * rotationSpeed * sawParent.transform.localScale.x * -1;
+        transform.rotation = Quaternion.Euler(new Vector3(1, 1, accumulatedRotationZ));
+
         if (!gameStarted)
         {
             return;
@@ -33,7 +41,7 @@ public class Saw : MonoBehaviour {
 
         if (!knockbackInProgress)
         {
-            transform.position = transform.position + speed * (Vector3)dir * Time.deltaTime;
+            sawParent.transform.position = sawParent.transform.position + speed * (Vector3)dir * Time.deltaTime;
         }
         else
         {
@@ -43,14 +51,14 @@ public class Saw : MonoBehaviour {
             }
             else
             {
-                transform.position = transform.position - knockbackSpeed * (Vector3)dir * Time.deltaTime;
+                sawParent.transform.position = sawParent.transform.position - knockbackSpeed * (Vector3)dir * Time.deltaTime;
             }
         }
 
         Vector2 ll = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         Vector2 ur = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, ll.x, ur.x), Mathf.Clamp(transform.position.y, ll.y, ur.y));
+        //sawParent.transform.position = new Vector2(Mathf.Clamp(sawParent.transform.position.x, ll.x, ur.x), Mathf.Clamp(sawParent.transform.position.y, ll.y, ur.y));
     }
 
     public void KnockBack()

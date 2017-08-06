@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50744514296584560}
   - component: {fileID: 114664498503523568}
   - component: {fileID: 95568974673059418}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Animal
   m_TagString: Animal
   m_Icon: {fileID: 0}
