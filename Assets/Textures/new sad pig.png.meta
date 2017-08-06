@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: f7987090e85162d46addedaca03b580b
-timeCreated: 1502053970
+guid: 5305bc23bf2261143b5b7443828fbd9c
+timeCreated: 1502055282
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: new sad pig_0
+    21300002: new sad pig_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -39,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -73,7 +75,35 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: new sad pig_0
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 82
+        width: 911
+        height: 1377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: new sad pig_1
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 1454
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

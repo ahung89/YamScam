@@ -25,12 +25,16 @@ public class GameManager : MonoBehaviour {
     float fadeStartTime;
     Image fadePanel;
 
+    public bool gameOver = false;
+    public GameObject gameOverPanel;
+
     void Awake()
     {
         Screen.SetResolution(450, 800, false);
         EventBus.Reset();
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         fadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
+        gameOverPanel = GameObject.Find("EndGamePanel");
         fadeStartTime = Time.time;
         StartCoroutine(FadeIn());
     }
@@ -55,7 +59,15 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (gameOver)
+            {
+                gameOverPanel.GetComponent<Canvas>().enabled = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
 
@@ -83,7 +95,7 @@ public class GameManager : MonoBehaviour {
             timer.UpdateTime(remainingTime);
         }
 
-        if (remainingTime <= 0)
+        if (remainingTime <= 0 && !gameOver)
         {
             gameEnded = true;
             fadeStartTime = Time.time;
@@ -94,18 +106,24 @@ public class GameManager : MonoBehaviour {
     public void IncrementGoodYamLost()
     {
         yamsLost++;
-        if (yamsLost == goodYamLossLimit)
+        if (yamsLost >= goodYamLossLimit && !gameOver)
         {
-            Debug.Log("You destroyed too many good yams.");
+            gameOver = true;
+            gameEnded = true;
+            fadeStartTime = Time.time;
+            StartCoroutine(FadeOut());
         }
     }
 
     public void IncrementLostAnimals()
     {
         numAnimalsLost++;
-        if (numAnimalsLost == numAnimalLives)
+        if (numAnimalsLost == numAnimalLives && !gameOver)
         {
-            Debug.Log("All the pigs have died.");
+            gameOver = true;
+            gameEnded = true;
+            fadeStartTime = Time.time;
+            StartCoroutine(FadeOut());
         }
     }
 }

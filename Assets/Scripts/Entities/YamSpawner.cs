@@ -10,6 +10,8 @@ public class YamSpawner : MonoBehaviour {
     public float animalReplacementSpeed;
     public float replacementWaitTime;
 
+    public Sprite originalFrame;
+
     // For elevated yams
     public float elevationSpeed = 0;
 
@@ -38,11 +40,19 @@ public class YamSpawner : MonoBehaviour {
     HeadMovement hoverScript;
     bool replacementStarted = false;
 
+    Vector2 spawnPos;
+
+    Animator spawnAnimator;
+
     void Awake()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         yamsPerSecond = gameManager.difficultyMultiplier;
         animalOriginalPosition = targetBeast.transform.position;
+        spawnAnimator = GetComponent<Animator>();
+        spawnAnimator.speed = .75f;
+        spawnAnimator.enabled = false;
+        spawnPos = transform.Find("SpawnPos").transform.position;
 
         if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
         {
@@ -61,14 +71,15 @@ public class YamSpawner : MonoBehaviour {
     public void HandleGameStart(GameStartedEvent e)
     {
         yamWaitSeconds = 1 / yamsPerSecond;
-        StartCoroutine(SpawnYam());
+        spawnAnimator.enabled = true;
+        //StartCoroutine(SpawnYam());
     }
 
-    IEnumerator SpawnYam ()
+    public void SpawnYam ()
     {
-        yield return new WaitForSeconds(yamWaitSeconds);
+        //yield return new WaitForSeconds(yamWaitSeconds);
         GameObject yamToSpawn = Random.Range(0, 100) < badYamSpawnChance ? fuckedYam : yam;
-        GameObject spawnedYam = Instantiate(yamToSpawn, transform.position, Quaternion.identity);
+        GameObject spawnedYam = Instantiate(yamToSpawn, spawnPos, Quaternion.identity);
         Yam datYam = spawnedYam.GetComponent<Yam>();
 
         if (yamToSpawn == fuckedYam)
@@ -91,7 +102,7 @@ public class YamSpawner : MonoBehaviour {
 
         datYam.SetTargetBeast(targetBeast);
 
-        StartCoroutine(SpawnYam());
+        //StartCoroutine(SpawnYam());
     }
 
     void DecorateFuckedYam(GameObject yizzam)
@@ -119,8 +130,10 @@ public class YamSpawner : MonoBehaviour {
         if (targetBeast == killedAnimal)
         {
             productionPaused = true;
-            StopAllCoroutines();
+            //StopAllCoroutines();
+            spawnAnimator.enabled = false;
             StartCoroutine(MoveKilledAnimalOffscreen());
+            GetComponent<SpriteRenderer>().sprite = originalFrame;
         }
     }
 
@@ -165,7 +178,8 @@ public class YamSpawner : MonoBehaviour {
         }
         else
         {
-            StartCoroutine(SpawnYam());
+            //StartCoroutine(SpawnYam());
+            spawnAnimator.enabled = true;
             productionPaused = false;
         }
     }
