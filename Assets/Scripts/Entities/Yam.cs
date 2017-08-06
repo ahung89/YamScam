@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Yam : MonoBehaviour {
+    public GameObject explosion;
+
     private Rigidbody2D rb2d;
     private GameObject targetBeast;
 
@@ -68,6 +70,7 @@ public class Yam : MonoBehaviour {
     {
         if (targetBeast == killedAnimal)
         {
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

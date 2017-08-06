@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4554403434343542}
   - component: {fileID: 212550226110219938}
+  - component: {fileID: 114732588844761430}
   m_Layer: 0
   m_Name: eyeball
   m_TagString: Untagged
@@ -53,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4206200337226840}
   - component: {fileID: 212182003658888958}
+  - component: {fileID: 114799883085845958}
   m_Layer: 0
   m_Name: eyeball (1)
   m_TagString: Untagged
@@ -115,6 +117,30 @@ MonoBehaviour:
   laserPrefab: {fileID: 1085938611198206, guid: d7c0e69fc5b52d94198df836dc953a93,
     type: 2}
   muzzleFlashPrefab: {fileID: 0}
+--- !u!114 &114732588844761430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458234204491990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d516fda78f93ef47b97bde10011ab4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
+--- !u!114 &114799883085845958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852779013918782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d516fda78f93ef47b97bde10011ab4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
 --- !u!212 &212025757270108238
 SpriteRenderer:
   m_ObjectHideFlags: 1
