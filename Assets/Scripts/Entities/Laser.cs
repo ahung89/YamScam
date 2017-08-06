@@ -15,17 +15,43 @@ public class Laser : MonoBehaviour {
     Vector2 targetPosition;
     Renderer renderera;
 
-    public void SetTarget(GameObject target)
+    // for determining behavior after joining
+    bool missed = false;
+    bool left = false;
+    bool joined = false;
+    Vector2 joinPosition;
+    Vector2 joinDir;
+    GameObject rightMissile;
+
+    Vector2 lastFramePos;
+
+    public void SetTarget(GameObject target, Vector2 joinPosition, bool left, GameObject rightMissile = null)
     {
-        initialPosition = transform.position;
+        this.rightMissile = rightMissile;
+        this.left = left;
+        missed = false;
         this.target = target;
         targetPosition = target.transform.position;
-        birthTime = Time.time;
+
+        this.joinPosition = joinPosition;
+        joinDir = (joinPosition - (Vector2)transform.position).normalized;
     }
 
-    public void SetMissDir(Vector2 missDir)
+    public void SetMissDir(Vector2 missDir, Vector2 joinPosition, bool left, GameObject rightMissile = null)
     {
+        this.rightMissile = rightMissile;
+        this.left = left;
+        missed = true;
         this.missDir = missDir.normalized;
+
+        this.joinPosition = joinPosition;
+        joinDir = (joinPosition - (Vector2)transform.position).normalized;
+    }
+
+    void InitWithTarget()
+    {
+        initialPosition = transform.position;
+        birthTime = Time.time;
     }
 
     void Awake()
@@ -39,7 +65,32 @@ public class Laser : MonoBehaviour {
     }
 
 	void Update () {
-		if (target != null)
+        if (lastFramePos == (Vector2)transform.position)
+        {
+            Destroy(gameObject);
+        }
+
+        lastFramePos = transform.position;
+        if (!joined)
+        {
+            transform.position += (Vector3)(missedSpeed * joinDir);
+            if (Vector2.Distance(transform.position, joinPosition) < .4f)
+            {
+                if (!missed)
+                {
+                    InitWithTarget();
+                }
+                joined = true;
+            }
+            return;
+        }
+
+        if (left && rightMissile != null)
+        {
+            transform.position = rightMissile.transform.position;
+        }
+
+        if (target != null)
         {
             if (initialPosition == targetPosition)
             {

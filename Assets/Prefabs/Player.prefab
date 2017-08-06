@@ -118,6 +118,9 @@ MonoBehaviour:
   laserPrefab: {fileID: 1085938611198206, guid: d7c0e69fc5b52d94198df836dc953a93,
     type: 2}
   muzzleFlashPrefab: {fileID: 0}
+  leftEye: {fileID: 1458234204491990}
+  rightEye: {fileID: 1852779013918782}
+  joinDistance: 3.5
 --- !u!114 &114102007319359702
 MonoBehaviour:
   m_ObjectHideFlags: 1

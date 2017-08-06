@@ -6,6 +6,9 @@ public class Player : MonoBehaviour {
 
     public GameObject laserPrefab;
     public GameObject muzzleFlashPrefab;
+    public GameObject leftEye;
+    public GameObject rightEye;
+    public float joinDistance = 3;
 
     private GameManager gameManager;
 
@@ -27,21 +30,36 @@ public class Player : MonoBehaviour {
 
             if (hit.transform == null || (hit.collider.tag != "BadYam" && hit.collider.tag != "Yam"))
             {
-                GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
-                laser.GetComponent<Laser>().SetMissDir(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+                GameObject left = Instantiate(laserPrefab, leftEye.transform.position, Quaternion.identity);
+                GameObject right = Instantiate(laserPrefab, rightEye.transform.position, Quaternion.identity);
+
+                Vector2 missDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+                Vector2 joinPos = (Vector2)transform.position + missDir * joinDistance;
+
+                left.GetComponent<Laser>().SetMissDir(missDir, joinPos, true, right);
+                right.GetComponent<Laser>().SetMissDir(missDir, joinPos, false);
             }
             else if (hit.transform != null && hit.collider.tag == "BadYam")
             {
-                GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);                laser.GetComponent<Laser>().SetTarget(hit.collider.gameObject);
-                laser.GetComponent<Laser>().SetTarget(hit.collider.gameObject);
-                //Destroy(hit.collider.gameObject);
+                GameObject left = Instantiate(laserPrefab, leftEye.transform.position, Quaternion.identity);
+                GameObject right = Instantiate(laserPrefab, rightEye.transform.position, Quaternion.identity);
+
+                Vector2 missDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+                Vector2 joinPos = (Vector2)transform.position + missDir * joinDistance;
+
+                left.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, true, right);
+                right.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, false);
             }
             else if (hit.transform != null && hit.collider.tag == "Yam")
             {
-                //Destroy(hit.collider.gameObject);
-                GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
-                laser.GetComponent<Laser>().SetTarget(hit.collider.gameObject);
-                gameManager.IncrementGoodYamLost();
+                GameObject left = Instantiate(laserPrefab, leftEye.transform.position, Quaternion.identity);
+                GameObject right = Instantiate(laserPrefab, rightEye.transform.position, Quaternion.identity);
+
+                Vector2 missDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+                Vector2 joinPos = (Vector2)transform.position + missDir * joinDistance;
+
+                left.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, true, right);
+                right.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, false);
             }
         }
     }
