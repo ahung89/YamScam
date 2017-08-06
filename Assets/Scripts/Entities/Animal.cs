@@ -11,11 +11,13 @@ public class Animal : MonoBehaviour {
 
     SpriteRenderer rendera;
     GameObject manager;
+    Animator animator;
 
     void Awake()
     {
         rendera = GetComponent<SpriteRenderer>();
         manager = GameObject.Find("Game Manager");
+        animator = GetComponent<Animator>();
     }
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -26,6 +28,7 @@ public class Animal : MonoBehaviour {
             if (rendera.sprite != munchFrame)
             {
                 rendera.sprite = munchFrame;
+                animator.enabled = false;
                 Invoke("Unmunch", munchTime);
             }
         }
@@ -62,5 +65,6 @@ public class Animal : MonoBehaviour {
     void Unmunch()
     {
         rendera.sprite = waitFrame;
+        animator.enabled = true;
     }
 }

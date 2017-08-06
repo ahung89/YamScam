@@ -1311,7 +1311,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.29
+      value: 3.71
       objectReference: {fileID: 0}
     - target: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1344,10 +1344,6 @@ Prefab:
     - target: {fileID: 1489102067682814, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
       propertyPath: m_Name
       value: Top Animal
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
@@ -1445,7 +1441,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.23
+      value: -0.69
       objectReference: {fileID: 0}
     - target: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1479,6 +1475,16 @@ Prefab:
       propertyPath: m_Name
       value: Bottom Animal
       objectReference: {fileID: 0}
+    - target: {fileID: 4310671884305958, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
+      propertyPath: m_LocalScale.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 212451704540431324, guid: 79a54c7145cd5cf4ca7b6cede8060f36,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e8cc37f2b7b473d439e3c065e18d68fe,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79a54c7145cd5cf4ca7b6cede8060f36, type: 2}
   m_IsPrefabParent: 0
