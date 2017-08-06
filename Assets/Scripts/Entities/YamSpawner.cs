@@ -6,6 +6,9 @@ public class YamSpawner : MonoBehaviour {
 
     public float yamsPerSecond;
     public float badYamSpawnChance;
+    public float animalReplacementDistance;
+    public float animalReplacementSpeed;
+    public float replacementWaitTime;
 
     // For elevated yams
     public float elevationSpeed = 0;
@@ -27,10 +30,31 @@ public class YamSpawner : MonoBehaviour {
 
     private float yamWaitSeconds;
     private GameManager gameManager;
+    private bool productionPaused;
+
+    Vector2 animalReplacementPosition;
+    Vector2 animalOriginalPosition;
+    int replacementDir;
+    HeadMovement hoverScript;
+    bool replacementStarted = false;
 
     void Awake()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        yamsPerSecond = gameManager.difficultyMultiplier;
+        animalOriginalPosition = targetBeast.transform.position;
+
+        if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
+        {
+            animalReplacementPosition = targetBeast.transform.position - new Vector3(animalReplacementDistance, 0, 0);
+            replacementDir = -1;
+        }
+        else
+        {
+            animalReplacementPosition = targetBeast.transform.position + new Vector3(animalReplacementDistance, 0, 0);
+            replacementDir = 1;
+        }
+        hoverScript = targetBeast.GetComponent<HeadMovement>();
     }
 
     [SubscribeGlobal]
@@ -94,7 +118,55 @@ public class YamSpawner : MonoBehaviour {
     {
         if (targetBeast == killedAnimal)
         {
-            Destroy(gameObject);
+            productionPaused = true;
+            StopAllCoroutines();
+            StartCoroutine(MoveKilledAnimalOffscreen());
+        }
+    }
+
+    IEnumerator MoveKilledAnimalOffscreen()
+    {
+        if (!replacementStarted)
+        {
+            replacementStarted = true;
+            yield return new WaitForSeconds(replacementWaitTime);
+        }
+        targetBeast.transform.position = Vector2.MoveTowards(targetBeast.transform.position, animalReplacementPosition, Time.deltaTime * animalReplacementSpeed);
+        hoverScript.UpdateInitialPos(targetBeast.transform.position.x);
+        yield return null;
+        if (Vector2.Distance(targetBeast.transform.position, animalReplacementPosition) > .1f)
+        {
+            StartCoroutine(MoveKilledAnimalOffscreen());
+        }
+        else
+        {
+            //replace animal
+            Destroy(targetBeast);
+            targetBeast = Instantiate(targetBeast, animalReplacementPosition, Quaternion.identity);
+            hoverScript = targetBeast.GetComponent<HeadMovement>();
+            StartCoroutine(MoveNewAnimalOnScreen());
+            targetBeast.GetComponent<Animator>().enabled = true;
+            targetBeast.GetComponent<BoxCollider2D>().enabled = true;
+            targetBeast.GetComponent<HeadMovement>().enabled = true;
+            //targetBeast.GetComponent<>
+            //set anims
+            //animate back to original position
+        }
+    }
+
+    IEnumerator MoveNewAnimalOnScreen()
+    {
+        targetBeast.transform.position = Vector2.MoveTowards(targetBeast.transform.position, animalOriginalPosition, Time.deltaTime * animalReplacementSpeed);
+        hoverScript.UpdateInitialPos(targetBeast.transform.position.x);
+        yield return null;
+        if (Vector2.Distance(targetBeast.transform.position, animalOriginalPosition) > .1f)
+        {
+            StartCoroutine(MoveNewAnimalOnScreen());
+        }
+        else
+        {
+            StartCoroutine(SpawnYam());
+            productionPaused = false;
         }
     }
 }

@@ -11,9 +11,26 @@ public class Saw : MonoBehaviour {
 
     bool knockbackInProgress;
     float knockbackStartTime;
+    bool gameStarted = false;
+
+    void Awake()
+    {
+        speed *= GameObject.Find("Game Manager").GetComponent<GameManager>().difficultyMultiplier;
+    }
+
+    [SubscribeGlobal]
+    public void Init(GameStartedEvent e)
+    {
+        gameStarted = true;
+    }
 
     void Update()
     {
+        if (!gameStarted)
+        {
+            return;
+        }
+
         if (!knockbackInProgress)
         {
             transform.position = transform.position + speed * (Vector3)dir * Time.deltaTime;

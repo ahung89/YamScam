@@ -10,13 +10,13 @@ public class Animal : MonoBehaviour {
     public float deathScreenShakeDuration = .3f;
 
     SpriteRenderer rendera;
-    GameObject manager;
+    GameManager manager;
     Animator animator;
 
     void Awake()
     {
         rendera = GetComponent<SpriteRenderer>();
-        manager = GameObject.Find("Game Manager");
+        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
     }
 
@@ -65,6 +65,8 @@ public class Animal : MonoBehaviour {
         {
             spawners[i].GetComponent<YamSpawner>().HandleBeastKilled(gameObject);
         }
+
+        manager.IncrementLostAnimals();
     }
 
     void Unmunch()

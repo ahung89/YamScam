@@ -13,6 +13,7 @@ public class ConveyorBelt : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         originalPos = transform.position;
+        speed *= GameObject.Find("Game Manager").GetComponent<GameManager>().difficultyMultiplier;
     }
 
     void FixedUpdate ()

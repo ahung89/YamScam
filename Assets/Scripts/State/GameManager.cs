@@ -8,18 +8,19 @@ public class GameManager : MonoBehaviour {
 
     public float remainingTime;
     public float gameBeginCountdownTime = 3;
-    public int goodYamLossLimit = 3;
     public int difficulty;
+    public float difficultyMultiplier = 1;
     public float fadeAlphaPerSec;
 
-    int numAnimals;
     int numAnimalsLost = 0;
-    int totalAnimalCount = 0;
+
+    static int numAnimalLives = 3;
+    static int goodYamLossLimit = 3;
+
     int yamsLost = 0;
 
     Timer timer;
     bool gameStarted = false;
-    bool fadeInFinished = false;
     bool gameEnded = false;
     float fadeStartTime;
     Image fadePanel;
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour {
     {
         Screen.SetResolution(450, 800, false);
         EventBus.Reset();
-        numAnimals = GameObject.FindGameObjectsWithTag("Animal").Length;
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         fadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
         fadeStartTime = Time.time;
@@ -42,10 +42,6 @@ public class GameManager : MonoBehaviour {
         if (fadePanel.color.a > 0)
         {
             StartCoroutine(FadeIn());
-        }
-        else
-        {
-            fadeInFinished = true;
         }
     }
 
@@ -100,13 +96,17 @@ public class GameManager : MonoBehaviour {
         yamsLost++;
         if (yamsLost == goodYamLossLimit)
         {
-            Debug.Log("YOU LOST YO");
+            Debug.Log("You destroyed too many good yams.");
         }
     }
 
     public void IncrementLostAnimals()
     {
         numAnimalsLost++;
+        if (numAnimalsLost == numAnimalLives)
+        {
+            Debug.Log("All the pigs have died.");
+        }
     }
 }
 

@@ -20,4 +20,9 @@ public class HeadMovement : MonoBehaviour {
         transform.position = new Vector2(initialPos.x, initialPos.y +
             (movementAmount * Mathf.Sin(Mathf.PI * 2 * ((Time.time - roundStart) / secondsPerCycle))));
 	}
+
+    public void UpdateInitialPos(float newX)
+    {
+        initialPos = new Vector2(newX, initialPos.y);
+    }
 }

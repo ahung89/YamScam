@@ -66,6 +66,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yamsPerSecond: 1
   badYamSpawnChance: 30
+  animalReplacementDistance: 2
+  animalReplacementSpeed: 1
+  replacementWaitTime: 0.25
   elevationSpeed: 3
   flyVelocity: {x: 0, y: 0}
   timeFlyScale: 0
