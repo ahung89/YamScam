@@ -120,7 +120,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitFrame: {fileID: 21300000, guid: 40c90b21c2b7d434cba13e403a289ff5, type: 3}
   munchFrame: {fileID: 21300000, guid: 838efb0814d5d96469b013c285a4240c, type: 3}
+  angryFrame: {fileID: 21300000, guid: f7987090e85162d46addedaca03b580b, type: 3}
+  deadFrame: {fileID: 21300000, guid: f605f54a1bade1f44bfdc3bbd84c06de, type: 3}
   munchTime: 0.2
+  angryTime: 0.5
   deathScreenShakeDuration: 0.3
 --- !u!114 &114664498503523568
 MonoBehaviour:
@@ -128,7 +131,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1489102067682814}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de55b815589f5fb43ab19214da98a678, type: 3}
   m_Name: 

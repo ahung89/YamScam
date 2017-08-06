@@ -7,7 +7,7 @@ public class Yam : MonoBehaviour {
     public bool destroyed = false;
 
     private Rigidbody2D rb2d;
-    private GameObject targetBeast;
+    public GameObject targetBeast;
 
     // For elevated yams
     private Vector2 elevatedVelocity;

@@ -6,7 +6,10 @@ public class Animal : MonoBehaviour {
 
     public Sprite waitFrame;
     public Sprite munchFrame;
+    public Sprite angryFrame;
+    public Sprite deadFrame;
     public float munchTime;
+    public float angryTime;
     public float deathScreenShakeDuration = .3f;
 
     SpriteRenderer rendera;
@@ -35,12 +38,21 @@ public class Animal : MonoBehaviour {
         }
         else if (other.tag == "BadYam")
         {
+            rendera.sprite = deadFrame;
             HandleAnimalDeath();
+            animator.enabled = false;
         }
         else if (other.tag == "Saw")
         {
             HandleAnimalDeath();
         }
+    }
+
+    public void Anger()
+    {
+        rendera.sprite = angryFrame;
+        animator.enabled = false;
+        Invoke("Unmunch", angryTime);
     }
 
     void HandleAnimalDeath()

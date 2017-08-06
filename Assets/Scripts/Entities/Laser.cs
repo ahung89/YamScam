@@ -120,6 +120,7 @@ public class Laser : MonoBehaviour {
             if (target.tag == "Yam" && !yam.destroyed)
             {
                 GameObject.Find("Lost Yams").GetComponent<IconStrip>().Mark();
+                yam.targetBeast.GetComponent<Animal>().Anger();
             }
 
             if (target.tag == "Saw")
@@ -130,6 +131,12 @@ public class Laser : MonoBehaviour {
             {
                 yam.Destroy();
             }
+        }
+        if (other.tag == "Saw")
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            other.GetComponent<Saw>().KnockBack();
         }
     }
 }
