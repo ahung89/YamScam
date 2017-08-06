@@ -21,6 +21,7 @@ public class Animal : MonoBehaviour {
         GameObject[] yams = GameObject.FindGameObjectsWithTag("Yam");
         GameObject[] badYams = GameObject.FindGameObjectsWithTag("BadYam");
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        GameObject.Find("Lives").GetComponent<IconStrip>().Mark();
 
         for (int i = 0; i < yams.Length; i++)
         {

@@ -8,22 +8,24 @@ public class Laser : MonoBehaviour {
     public float timeToImpact;
     public GameObject explosionPrefab;
     GameObject target;
-    Vector3 initialPosition;
+    Vector2 initialPosition;
     float birthTime;
 
     Vector2 missDir;
+    Vector2 targetPosition;
     Renderer renderera;
 
     public void SetTarget(GameObject target)
     {
         initialPosition = transform.position;
         this.target = target;
+        targetPosition = target.transform.position;
         birthTime = Time.time;
     }
 
     public void SetMissDir(Vector2 missDir)
     {
-        this.missDir = missDir;
+        this.missDir = missDir.normalized;
     }
 
     void Awake()
@@ -39,7 +41,11 @@ public class Laser : MonoBehaviour {
 	void Update () {
 		if (target != null)
         {
-            transform.position = Vector2.Lerp(initialPosition, target.transform.position, (Time.time - birthTime) /timeToImpact);
+            if (initialPosition == targetPosition)
+            {
+                Destroy(gameObject);
+            }
+            transform.position = Vector2.Lerp(initialPosition, targetPosition, (Time.time - birthTime) /timeToImpact);
         }
         else
         {
@@ -58,6 +64,11 @@ public class Laser : MonoBehaviour {
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
             other.GetComponent<Yam>().Destroy();
+
+            if (target.tag == "Yam")
+            {
+                GameObject.Find("Lost Yams").GetComponent<IconStrip>().Mark();
+            }
         }
     }
 }

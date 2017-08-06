@@ -25,18 +25,18 @@ public class Player : MonoBehaviour {
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-            if (hit.transform == null)
+            if (hit.transform == null || (hit.collider.tag != "BadYam" && hit.collider.tag != "Yam"))
             {
                 GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
-                laser.GetComponent<Laser>().SetMissDir((Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized);
+                laser.GetComponent<Laser>().SetMissDir(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
             }
-            else if (hit.collider.tag == "BadYam")
+            else if (hit.transform != null && hit.collider.tag == "BadYam")
             {
                 GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);                laser.GetComponent<Laser>().SetTarget(hit.collider.gameObject);
                 laser.GetComponent<Laser>().SetTarget(hit.collider.gameObject);
                 //Destroy(hit.collider.gameObject);
             }
-            else if (hit.collider.tag == "Yam")
+            else if (hit.transform != null && hit.collider.tag == "Yam")
             {
                 //Destroy(hit.collider.gameObject);
                 GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);

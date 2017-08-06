@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eeb444d9790f140aaf2aaad99a3715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missedSpeed: 2
+  missedSpeed: 1
   timeToImpact: 0.1
   explosionPrefab: {fileID: 1557544881763272, guid: b733d7de19c968c48b7a53d9c9952a1a,
     type: 2}

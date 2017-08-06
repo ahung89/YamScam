@@ -55,7 +55,7 @@ public class Yam : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         this.circleFlightSpeed = circleFlightSpeed;
-        this.flyStartTime = Time.time;
+        flyStartTime = Time.time;
         rb2d.gravityScale = 0;
     }
 
