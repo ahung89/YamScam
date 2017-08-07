@@ -51,6 +51,10 @@ public class Timer : MonoBehaviour {
             {
                 text.text = remainingIntTime.ToString();
             }
+            else
+            {
+                text.text = "";
+            }
         }
         if (remainingIntTime <= threshold)
         {

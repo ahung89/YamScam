@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce989c9c30d2cd949b4f5f0ab1f42955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingTime: 10
+  remainingTime: 30
   gameBeginCountdownTime: 4
   difficulty: 0
   difficultyMultiplier: 1
