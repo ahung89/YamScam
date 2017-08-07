@@ -44,7 +44,9 @@ public class Animal : MonoBehaviour {
         }
         else if (other.tag == "Saw")
         {
+            rendera.sprite = deadFrame;
             HandleAnimalDeath();
+            animator.enabled = false;
         }
     }
 

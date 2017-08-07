@@ -13,17 +13,14 @@ public class Timer : MonoBehaviour {
     RectTransform rt;
     Text text;
 
-    public List<AudioSource> beeps;
-    public List<AudioSource> songs;
-
-    public AudioSource winSound;
-    public AudioSource loseSound;
+    GameManager gameManager;
 
     private void Awake ()
     {
         rt = GetComponent<RectTransform>();
         text = GetComponent<Text>();
         displayedTime = int.Parse(text.text);
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     public void UpdateTime (float remainingTime, bool gameStartCountdown = false)
@@ -39,6 +36,15 @@ public class Timer : MonoBehaviour {
             displayedTime = remainingIntTime;
             if (gameStartCountdown)
             {
+                int beepIndex = 3 - remainingIntTime;
+                if (beepIndex >= 0 && beepIndex <= 2)
+                {
+                    gameManager.beeps[beepIndex].Play();
+                }
+                else if (remainingIntTime == 0)
+                {
+                    gameManager.song.Play();
+                }
                 text.text = remainingIntTime == 0 ? "GO" : remainingIntTime.ToString();
             }
             else if (remainingIntTime != 0)

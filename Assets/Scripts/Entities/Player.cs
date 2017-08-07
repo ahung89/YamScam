@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     public GameObject rightEye;
     public float joinDistance = 3;
 
-    public AudioSource laserSound;
+    public AudioClip laserSound;
 
     private GameManager gameManager;
 
@@ -40,6 +40,8 @@ public class Player : MonoBehaviour {
 
                 left.GetComponent<Laser>().SetMissDir(missDir, joinPos, true, right);
                 right.GetComponent<Laser>().SetMissDir(missDir, joinPos, false);
+
+                left.GetComponent<AudioSource>().Play();
             }
             else if (hit.transform != null && hit.collider.tag == "BadYam" || hit.collider.tag == "Yam" || hit.collider.tag == "Saw")
             {
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour {
 
                 left.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, true, right);
                 right.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, false);
+
+                left.GetComponent<AudioSource>().Play();
             }
             else if (hit.transform != null && hit.collider.tag == "Yam")
             {
@@ -62,6 +66,8 @@ public class Player : MonoBehaviour {
 
                 left.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, true, right);
                 right.GetComponent<Laser>().SetTarget(hit.collider.gameObject, joinPos, false);
+
+                left.GetComponent<AudioSource>().Play();
             }
         }
     }

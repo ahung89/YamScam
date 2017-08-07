@@ -122,6 +122,7 @@ public class Laser : MonoBehaviour {
                 GameObject.Find("Game Manager").GetComponent<GameManager>().IncrementGoodYamLost();
                 GameObject.Find("Lost Yams").GetComponent<IconStrip>().Mark();
                 yam.targetBeast.GetComponent<Animal>().Anger();
+                yam.targetBeast.GetComponent<AudioSource>().Play();
             }
 
             if (target.tag == "Saw")

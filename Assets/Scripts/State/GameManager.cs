@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     static int goodYamLossLimit = 3;
 
     int yamsLost = 0;
+    public AudioSource song;
 
     Timer timer;
     bool gameStarted = false;
@@ -28,7 +29,12 @@ public class GameManager : MonoBehaviour {
     public bool gameOver = false;
     public GameObject gameOverPanel;
 
-    void Awake()
+
+    public List<AudioSource> beeps;
+    public AudioSource winSound;
+    public AudioSource loseSound;
+
+    void Awake ()
     {
         Screen.SetResolution(450, 800, false);
         EventBus.Reset();
@@ -37,6 +43,15 @@ public class GameManager : MonoBehaviour {
         gameOverPanel = GameObject.Find("EndGamePanel");
         fadeStartTime = Time.time;
         StartCoroutine(FadeIn());
+
+        winSound = transform.Find("WinSound").GetComponent<AudioSource>();
+        loseSound = transform.Find("LoseSound").GetComponent<AudioSource>();
+
+        beeps = new List<AudioSource>() {
+            transform.Find("Beep1").GetComponent<AudioSource>(),
+            transform.Find("Beep2").GetComponent<AudioSource>(),
+            transform.Find("Beep3").GetComponent<AudioSource>()
+        };
     }
 
     IEnumerator FadeIn ()
@@ -62,10 +77,13 @@ public class GameManager : MonoBehaviour {
             if (gameOver)
             {
                 gameOverPanel.GetComponent<Canvas>().enabled = true;
+                song.Stop();
                 Time.timeScale = 0;
+                loseSound.Play();
             }
             else
             {
+                yield return new WaitForSeconds(2);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
@@ -100,6 +118,9 @@ public class GameManager : MonoBehaviour {
             gameEnded = true;
             fadeStartTime = Time.time;
             StartCoroutine(FadeOut());
+
+            song.Stop();
+            winSound.Play();
         }
     }
 
