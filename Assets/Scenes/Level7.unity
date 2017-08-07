@@ -152,11 +152,6 @@ Prefab:
       propertyPath: song
       value: 
       objectReference: {fileID: 785075568}
-    - target: {fileID: 114527171326446704, guid: afdee307ad0fa9845945c554129f7cb1,
-        type: 2}
-      propertyPath: remainingTime
-      value: 30
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: afdee307ad0fa9845945c554129f7cb1, type: 2}
   m_IsPrefabParent: 0
