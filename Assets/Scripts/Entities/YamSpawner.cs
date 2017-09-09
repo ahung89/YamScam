@@ -46,7 +46,7 @@ public class YamSpawner : MonoBehaviour {
 
     void Awake()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameManager.Instance;
         yamsPerSecond = gameManager.difficultyMultiplier;
         animalOriginalPosition = targetBeast.transform.position;
         spawnAnimator = GetComponent<Animator>();

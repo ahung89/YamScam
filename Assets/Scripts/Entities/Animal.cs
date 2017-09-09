@@ -19,7 +19,7 @@ public class Animal : MonoBehaviour {
     void Awake()
     {
         rendera = GetComponent<SpriteRenderer>();
-        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        manager = GameManager.Instance;
         animator = GetComponent<Animator>();
     }
 

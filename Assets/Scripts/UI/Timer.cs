@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour {
         rt = GetComponent<RectTransform>();
         text = GetComponent<Text>();
         displayedTime = int.Parse(text.text);
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameManager.Instance;
     }
 
     public void UpdateTime (float remainingTime, bool gameStartCountdown = false)

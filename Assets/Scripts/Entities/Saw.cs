@@ -19,7 +19,7 @@ public class Saw : MonoBehaviour {
 
     void Awake()
     {
-        speed *= GameObject.Find("Game Manager").GetComponent<GameManager>().difficultyMultiplier;
+        speed *= GameManager.Instance.difficultyMultiplier;
         sawParent = transform.parent.gameObject;
     }
 

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager Instance;
+
     public float remainingTime;
     public float gameBeginCountdownTime = 3;
     public int difficulty;
@@ -36,6 +38,14 @@ public class GameManager : MonoBehaviour {
 
     void Awake ()
     {
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+            return;
+        }
+
+        Instance = this;
+
         Screen.SetResolution(450, 800, false);
         EventBus.Reset();
         timer = GameObject.Find("Timer").GetComponent<Timer>();

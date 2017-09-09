@@ -12,18 +12,6 @@ public class Player : MonoBehaviour {
 
     public AudioClip laserSound;
 
-    private GameManager gameManager;
-
-    private void Awake ()
-    {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-    }
-
-    void OnLevelWasLoaded()
-    {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-    }
-
     void Update ()
     {
         if (Input.GetMouseButtonDown(0))
