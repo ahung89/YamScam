@@ -129,10 +129,13 @@ public class GameManager : MonoBehaviour {
         yamsLost++;
         if (yamsLost >= goodYamLossLimit && !gameOver)
         {
-            gameOver = true;
-            gameEnded = true;
-            fadeStartTime = Time.time;
-            StartCoroutine(FadeOut());
+            if (SceneManager.GetActiveScene().buildIndex == 6)
+            {
+                gameOver = true;
+                gameEnded = true;
+                fadeStartTime = Time.time;
+                StartCoroutine(FadeOut());
+            }
         }
     }
 
@@ -141,10 +144,13 @@ public class GameManager : MonoBehaviour {
         numAnimalsLost++;
         if (numAnimalsLost == numAnimalLives && !gameOver)
         {
-            gameOver = true;
-            gameEnded = true;
-            fadeStartTime = Time.time;
-            StartCoroutine(FadeOut());
+            if (SceneManager.GetActiveScene().buildIndex == 6)
+            {
+                gameOver = true;
+                gameEnded = true;
+                fadeStartTime = Time.time;
+                StartCoroutine(FadeOut());
+            }
         }
     }
 }
