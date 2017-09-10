@@ -23,7 +23,6 @@ public class YamSpawner : MonoBehaviour {
     public float circleFlightSpeed;
 
     public GameObject yam;
-    public GameObject fuckedYam;
     public GameObject targetBeast;
 
     public List<Sprite> yamSprites;
@@ -76,11 +75,12 @@ public class YamSpawner : MonoBehaviour {
 
     public void SpawnYam ()
     {
-        GameObject yamToSpawn = Random.Range(0, 100) < badYamSpawnChance ? fuckedYam : yam;
-        GameObject spawnedYam = Instantiate(yamToSpawn, spawnPos, Quaternion.identity);
+        bool spawnBadYam = Random.Range(0, 100) < badYamSpawnChance;
+        GameObject spawnedYam = Instantiate(yam, spawnPos, Quaternion.identity);
         Yam datYam = spawnedYam.GetComponent<Yam>();
+        datYam.isBad = spawnBadYam;
 
-        if (yamToSpawn == fuckedYam)
+        if (spawnBadYam)
         {
             DecorateFuckedYam(datYam.gameObject);
         }

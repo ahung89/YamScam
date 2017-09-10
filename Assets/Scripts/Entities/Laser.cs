@@ -117,7 +117,7 @@ public class Laser : MonoBehaviour {
             Destroy(gameObject);
             Yam yam = other.GetComponent<Yam>();
 
-            if (target.tag == TagNames.YAM && !yam.destroyed)
+            if (target.tag == TagNames.YAM && !yam.isBad && !yam.destroyed)
             {
                 GameManager.Instance.IncrementGoodYamLost();
                 EventBus.PublishEvent(new GoodYamLostEvent());

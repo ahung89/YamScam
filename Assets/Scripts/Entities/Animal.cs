@@ -30,19 +30,22 @@ public class Animal : MonoBehaviour {
 
         if (other.tag == TagNames.YAM)
         {
-            Destroy(other.gameObject);
-            if (rendera.sprite != munchFrame)
+            if (other.GetComponent<Yam>().isBad)
             {
-                rendera.sprite = munchFrame;
+                rendera.sprite = deadFrame;
+                HandleAnimalDeath();
                 animator.enabled = false;
-                Invoke("Unmunch", munchTime);
             }
-        }
-        else if (other.tag == TagNames.BAD_YAM)
-        {
-            rendera.sprite = deadFrame;
-            HandleAnimalDeath();
-            animator.enabled = false;
+            else
+            {
+                Destroy(other.gameObject);
+                if (rendera.sprite != munchFrame)
+                {
+                    rendera.sprite = munchFrame;
+                    animator.enabled = false;
+                    Invoke("Unmunch", munchTime);
+                }
+            }
         }
         else if (other.tag == TagNames.SAW)
         {

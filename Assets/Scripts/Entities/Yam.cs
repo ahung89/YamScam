@@ -5,6 +5,7 @@ using UnityEngine;
 public class Yam : MonoBehaviour {
     public GameObject explosion;
     public bool destroyed = false;
+    public bool isBad = false;
 
     private Rigidbody2D rb2d;
     public GameObject targetBeast;
