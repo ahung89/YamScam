@@ -9,39 +9,22 @@ public class YamSpawner : MonoBehaviour {
     public float animalReplacementDistance;
     public float animalReplacementSpeed;
     public float replacementWaitTime;
-
     public Sprite originalFrame;
-
-    // For elevated yams
-    public float elevationSpeed = 0;
-
-    // For flying yams
-    public Vector2 flyVelocity;
-    public float timeFlyScale;
-
-    // For circle yams
-    public float circleFlightSpeed;
-
-    public GameObject yam;
+    public GameObject yamPrefab;
     public GameObject targetBeast;
-
     public List<Sprite> yamSprites;
-
     public GameObject spawnPosObj;
 
     private float yamWaitSeconds;
     private GameManager gameManager;
     private bool productionPaused;
-
-    Vector2 animalReplacementPosition;
-    Vector2 animalOriginalPosition;
-    int replacementDir;
-    HeadMovement hoverScript;
-    bool replacementStarted = false;
-
-    Vector2 spawnPos;
-
-    Animator spawnAnimator;
+    private Vector2 animalReplacementPosition;
+    private Vector2 animalOriginalPosition;
+    private int replacementDir;
+    private HeadMovement hoverScript;
+    private bool replacementStarted = false;
+    private Vector2 spawnPos;
+    private Animator spawnAnimator;
 
     void Awake()
     {
@@ -76,34 +59,21 @@ public class YamSpawner : MonoBehaviour {
     public void SpawnYam ()
     {
         bool spawnBadYam = Random.Range(0, 100) < badYamSpawnChance;
-        GameObject spawnedYam = Instantiate(yam, spawnPos, Quaternion.identity);
-        Yam datYam = spawnedYam.GetComponent<Yam>();
-        datYam.isBad = spawnBadYam;
+        GameObject spawnedYam = Instantiate(yamPrefab, spawnPos, Quaternion.identity);
+        Yam yam = spawnedYam.GetComponent<Yam>();
+        yam.isBad = spawnBadYam;
 
         if (spawnBadYam)
         {
-            DecorateFuckedYam(datYam.gameObject);
+            DecorateBadYam(yam.gameObject);
         }
 
-        if (elevationSpeed != 0)
-        {
-            datYam.Elevate(elevationSpeed);
-        }
-        else if (flyVelocity != Vector2.zero)
-        {
-            datYam.MakeFly(flyVelocity, timeFlyScale);
-        }
-        else if (circleFlightSpeed != 0)
-        {
-            datYam.MakeFlyCircle(circleFlightSpeed);
-        }
-
-        datYam.SetTargetBeast(targetBeast);
+        yam.Init(gameObject, targetBeast);
     }
 
-    void DecorateFuckedYam(GameObject yizzam)
+    void DecorateBadYam(GameObject yam)
     {
-        yizzam.GetComponent<SpriteRenderer>().sprite = yamSprites[Random.Range(0, yamSprites.Count)];
+        yam.GetComponent<SpriteRenderer>().sprite = yamSprites[Random.Range(0, yamSprites.Count)];
     }
 
     [SubscribeGlobal]
