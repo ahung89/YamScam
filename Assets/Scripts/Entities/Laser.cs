@@ -120,7 +120,7 @@ public class Laser : MonoBehaviour {
             if (target.tag == TagNames.YAM && !yam.destroyed)
             {
                 GameManager.Instance.IncrementGoodYamLost();
-                GameObject.Find("Lost Yams").GetComponent<IconStrip>().Mark();
+                EventBus.PublishEvent(new GoodYamLostEvent());
                 yam.targetBeast.GetComponent<Animal>().Anger();
                 yam.targetBeast.GetComponent<AudioSource>().Play();
             }

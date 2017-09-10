@@ -67,9 +67,10 @@ public class Yam : MonoBehaviour {
         this.targetBeast = targetBeast;
     }
 
-    public void HandleBeastKilled(GameObject killedAnimal)
+    [SubscribeGlobal]
+    public void HandleBeastKilled(BeastKilledEvent e)
     {
-        if (targetBeast == killedAnimal)
+        if (targetBeast == e.beast)
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);

@@ -11,7 +11,8 @@ public static class EventBus {
 
     public static void PublishEvent(object e, bool includeInactive = false)
     {
-        cleanupList.Clear();
+        Cleanup();
+
         Type t = e.GetType();
 
         if (!events.ContainsKey(t))
@@ -24,8 +25,6 @@ public static class EventBus {
         eventTypeBeingProcessed = t;
         foreach (List<Delegate> funcs in eventDict.Values)
         {
-            cleanupList.Clear();
-
             // right now global events only work for monobehaviours
             GameObject obj = (funcs[0].Target as MonoBehaviour).gameObject;
 
@@ -42,11 +41,21 @@ public static class EventBus {
             }
         }
         eventTypeBeingProcessed = null;
+    }
 
-        foreach (GameObject obj in cleanupList)
+    private static void Cleanup()
+    {
+        foreach (Dictionary<GameObject, List<Delegate>> dict in events.Values)
         {
-            eventDict.Remove(obj);
+            foreach(GameObject go in cleanupList)
+            {
+                if (dict.ContainsKey(go))
+                {
+                    dict.Remove(go);
+                }
+            }
         }
+        cleanupList.Clear();
     }
 
     public static void Subscribe<T> (Action<T> func) where T : struct
@@ -93,6 +102,11 @@ public static class EventBus {
                 }
             }
         }
+    }
+
+    public static void UnsubscribeAll(GameObject obj)
+    {
+        cleanupList.Add(obj);
     }
 
     public static void Unsubscribe<T>(this GameObject obj, Action<T> func)

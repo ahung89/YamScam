@@ -145,7 +145,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void IncrementLostAnimals()
+    [SubscribeGlobal]
+    public void HandleBeastKilledEvent(BeastKilledEvent e)
+    {
+        IncrementLostAnimals();
+    }
+
+    void IncrementLostAnimals()
     {
         numAnimalsLost++;
         if (numAnimalsLost == numAnimalLives && !gameOver)

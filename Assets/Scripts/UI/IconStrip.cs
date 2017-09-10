@@ -2,6 +2,8 @@
 
 public class IconStrip : MonoBehaviour {
 
+    public IconStripType type;
+
     Icon[] icons;
 
     void Awake()
@@ -17,6 +19,26 @@ public class IconStrip : MonoBehaviour {
         {
             marked = icons[i].Mark();
             i++;
+        }
+    }
+
+    public enum IconStripType { LostYams, Lives }
+
+    [SubscribeGlobal]
+    public void HandleBeastKilledEvent(BeastKilledEvent e)
+    {
+        if (type == IconStripType.Lives)
+        {
+            Mark();
+        }
+    }
+
+    [SubscribeGlobal]
+    public void GoodYamLostEvent (GoodYamLostEvent e)
+    {
+        if (type == IconStripType.LostYams)
+        {
+            Mark();
         }
     }
 }

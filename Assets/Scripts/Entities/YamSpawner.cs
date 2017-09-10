@@ -76,7 +76,6 @@ public class YamSpawner : MonoBehaviour {
 
     public void SpawnYam ()
     {
-        //yield return new WaitForSeconds(yamWaitSeconds);
         GameObject yamToSpawn = Random.Range(0, 100) < badYamSpawnChance ? fuckedYam : yam;
         GameObject spawnedYam = Instantiate(yamToSpawn, spawnPos, Quaternion.identity);
         Yam datYam = spawnedYam.GetComponent<Yam>();
@@ -104,12 +103,13 @@ public class YamSpawner : MonoBehaviour {
 
     void DecorateFuckedYam(GameObject yizzam)
     {
-        yizzam.GetComponent<SpriteRenderer>().sprite = this.yamSprites[Random.Range(0, yamSprites.Count)];
+        yizzam.GetComponent<SpriteRenderer>().sprite = yamSprites[Random.Range(0, yamSprites.Count)];
     }
 
-    public void HandleBeastKilled (GameObject killedAnimal)
+    [SubscribeGlobal]
+    public void HandleBeastKilled (BeastKilledEvent e)
     {
-        if (targetBeast == killedAnimal)
+        if (targetBeast == e.beast)
         {
             productionPaused = true;
             spawnAnimator.enabled = false;
@@ -134,7 +134,6 @@ public class YamSpawner : MonoBehaviour {
         }
         else
         {
-            //replace animal
             Destroy(targetBeast);
             targetBeast = Instantiate(targetBeast, animalReplacementPosition, Quaternion.identity);
             hoverScript = targetBeast.GetComponent<HeadMovement>();
@@ -142,9 +141,6 @@ public class YamSpawner : MonoBehaviour {
             targetBeast.GetComponent<Animator>().enabled = true;
             targetBeast.GetComponent<BoxCollider2D>().enabled = true;
             targetBeast.GetComponent<HeadMovement>().enabled = true;
-            //targetBeast.GetComponent<>
-            //set anims
-            //animate back to original position
         }
     }
 
@@ -153,13 +149,13 @@ public class YamSpawner : MonoBehaviour {
         targetBeast.transform.position = Vector2.MoveTowards(targetBeast.transform.position, animalOriginalPosition, Time.deltaTime * animalReplacementSpeed);
         hoverScript.UpdateInitialPos(targetBeast.transform.position.x);
         yield return null;
+
         if (Vector2.Distance(targetBeast.transform.position, animalOriginalPosition) > .1f)
         {
             StartCoroutine(MoveNewAnimalOnScreen());
         }
         else
         {
-            //StartCoroutine(SpawnYam());
             spawnAnimator.enabled = true;
             productionPaused = false;
         }

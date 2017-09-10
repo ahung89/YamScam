@@ -15,12 +15,14 @@ public class Animal : MonoBehaviour {
     SpriteRenderer rendera;
     GameManager manager;
     Animator animator;
+    ScreenShake screenShake;
 
     void Awake()
     {
         rendera = GetComponent<SpriteRenderer>();
         manager = GameManager.Instance;
         animator = GetComponent<Animator>();
+        screenShake = manager.GetComponent<ScreenShake>();
     }
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -59,28 +61,8 @@ public class Animal : MonoBehaviour {
 
     void HandleAnimalDeath()
     {
-        GameObject[] yams = GameObject.FindGameObjectsWithTag("Yam");
-        GameObject[] badYams = GameObject.FindGameObjectsWithTag("BadYam");
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        GameObject.Find("Lives").GetComponent<IconStrip>().Mark();
-        manager.GetComponent<ScreenShake>().ShakeScreen(deathScreenShakeDuration);
-
-        for (int i = 0; i < yams.Length; i++)
-        {
-            yams[i].GetComponent<Yam>().HandleBeastKilled(gameObject);
-        }
-
-        for (int i = 0; i < badYams.Length; i++)
-        {
-            badYams[i].GetComponent<Yam>().HandleBeastKilled(gameObject);
-        }
-
-        for (int i = 0; i < spawners.Length; i++)
-        {
-            spawners[i].GetComponent<YamSpawner>().HandleBeastKilled(gameObject);
-        }
-
-        manager.IncrementLostAnimals();
+        EventBus.PublishEvent(new BeastKilledEvent(gameObject));
+        screenShake.ShakeScreen(deathScreenShakeDuration);
     }
 
     void Unmunch()

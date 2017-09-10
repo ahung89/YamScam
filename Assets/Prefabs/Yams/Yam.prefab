@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61455834753567080}
   - component: {fileID: 114196498160309878}
   - component: {fileID: 82654734666565476}
+  - component: {fileID: 114133185038276076}
   m_Layer: 8
   m_Name: Yam
   m_TagString: Yam
@@ -169,6 +170,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114133185038276076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732335763756408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d3efee04cbb7548ae4048a1c0988b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114196498160309878
 MonoBehaviour:
   m_ObjectHideFlags: 1

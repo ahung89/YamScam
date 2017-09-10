@@ -58,7 +58,7 @@ public class EventSubscriber : MonoBehaviour {
         }
     }
 
-    public void Awake()
+    void Awake()
     {
         MonoBehaviour[] monoBehaviours = GetComponents<MonoBehaviour>();
 
@@ -66,6 +66,11 @@ public class EventSubscriber : MonoBehaviour {
         {
             RegisterCallbacks(monoBehaviour);
         }
+    }
+
+    private void OnDestroy ()
+    {
+        EventBus.UnsubscribeAll(gameObject);
     }
 
     public void Subscribe<T>(Delegate del)
