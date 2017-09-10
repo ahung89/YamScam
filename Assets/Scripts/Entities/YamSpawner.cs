@@ -26,9 +26,9 @@ public class YamSpawner : MonoBehaviour {
     public GameObject fuckedYam;
     public GameObject targetBeast;
 
-    public List<Sprite> easyFuckedYams;
-    public List<Sprite> mediumFuckedYams;
-    public List<Sprite> difficultFuckedYams;
+    public List<Sprite> yamSprites;
+
+    public GameObject spawnPosObj;
 
     private float yamWaitSeconds;
     private GameManager gameManager;
@@ -52,7 +52,7 @@ public class YamSpawner : MonoBehaviour {
         spawnAnimator = GetComponent<Animator>();
         spawnAnimator.speed = .75f;
         spawnAnimator.enabled = false;
-        spawnPos = transform.Find("SpawnPos").transform.position;
+        spawnPos = spawnPosObj.transform.position;
 
         if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
         {
@@ -72,7 +72,6 @@ public class YamSpawner : MonoBehaviour {
     {
         yamWaitSeconds = 1 / yamsPerSecond;
         spawnAnimator.enabled = true;
-        //StartCoroutine(SpawnYam());
     }
 
     public void SpawnYam ()
@@ -101,28 +100,11 @@ public class YamSpawner : MonoBehaviour {
         }
 
         datYam.SetTargetBeast(targetBeast);
-
-        //StartCoroutine(SpawnYam());
     }
 
     void DecorateFuckedYam(GameObject yizzam)
     {
-        List<Sprite> yamSprites;
-        
-        if (gameManager.difficulty == 0)
-        {
-            yamSprites = easyFuckedYams;
-        }
-        else if (gameManager.difficulty == 1)
-        {
-            yamSprites = mediumFuckedYams;
-        }
-        else
-        {
-            yamSprites = difficultFuckedYams;
-        }
-
-        yizzam.GetComponent<SpriteRenderer>().sprite = yamSprites[Random.Range(0, yamSprites.Count)];
+        yizzam.GetComponent<SpriteRenderer>().sprite = this.yamSprites[Random.Range(0, yamSprites.Count)];
     }
 
     public void HandleBeastKilled (GameObject killedAnimal)
@@ -130,7 +112,6 @@ public class YamSpawner : MonoBehaviour {
         if (targetBeast == killedAnimal)
         {
             productionPaused = true;
-            //StopAllCoroutines();
             spawnAnimator.enabled = false;
             StartCoroutine(MoveKilledAnimalOffscreen());
             GetComponent<SpriteRenderer>().sprite = originalFrame;

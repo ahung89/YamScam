@@ -117,7 +117,7 @@ public class Laser : MonoBehaviour {
             Destroy(gameObject);
             Yam yam = other.GetComponent<Yam>();
 
-            if (target.tag == "Yam" && !yam.destroyed)
+            if (target.tag == TagNames.YAM && !yam.destroyed)
             {
                 GameManager.Instance.IncrementGoodYamLost();
                 GameObject.Find("Lost Yams").GetComponent<IconStrip>().Mark();
@@ -125,7 +125,7 @@ public class Laser : MonoBehaviour {
                 yam.targetBeast.GetComponent<AudioSource>().Play();
             }
 
-            if (target.tag == "Saw")
+            if (target.tag == TagNames.SAW)
             {
                 target.GetComponent<Saw>().KnockBack();
             }
@@ -134,7 +134,7 @@ public class Laser : MonoBehaviour {
                 yam.Destroy();
             }
         }
-        if (other.tag == "Saw")
+        if (other.tag == TagNames.SAW)
         {
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);

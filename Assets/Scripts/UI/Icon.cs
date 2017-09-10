@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Icon : MonoBehaviour {
@@ -10,6 +8,7 @@ public class Icon : MonoBehaviour {
     public float wiggleDuration;
     public float rotationFrequencyMultiplier;
     public Sprite badFrame;
+    public Image img; // GetComponentInChildren looks at root first
 
     bool marked;
     bool wiggling = false;
@@ -27,8 +26,7 @@ public class Icon : MonoBehaviour {
             return false;
 
         marked = true;
-        transform.Find("Img").GetComponent<Image>().sprite = badFrame;
-        //GetComponent<Image>().color = Color.red;
+        img.sprite = badFrame;
         wiggling = true;
         wiggleStartTime = Time.time;
         return true;

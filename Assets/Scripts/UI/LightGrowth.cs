@@ -16,7 +16,6 @@ public class LightGrowth : MonoBehaviour {
     }
 	
 	void Update () {
-        //if (Time.time < startTime) return;
         float scaleAdd = Mathf.Abs(growthAmount * Mathf.Sin((2 * Mathf.PI * (Time.time - startTime)) / cycleSeconds));
         transform.localScale = new Vector2(initialSize.x + scaleAdd, initialSize.y + scaleAdd);		
 	}

@@ -26,7 +26,7 @@ public class Animal : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.tag == "Yam")
+        if (other.tag == TagNames.YAM)
         {
             Destroy(other.gameObject);
             if (rendera.sprite != munchFrame)
@@ -36,13 +36,13 @@ public class Animal : MonoBehaviour {
                 Invoke("Unmunch", munchTime);
             }
         }
-        else if (other.tag == "BadYam")
+        else if (other.tag == TagNames.BAD_YAM)
         {
             rendera.sprite = deadFrame;
             HandleAnimalDeath();
             animator.enabled = false;
         }
-        else if (other.tag == "Saw")
+        else if (other.tag == TagNames.SAW)
         {
             rendera.sprite = deadFrame;
             HandleAnimalDeath();
