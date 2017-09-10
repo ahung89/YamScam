@@ -2502,16 +2502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b1fbd324980e749be986b869fd109c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 1085938611198206, guid: d7c0e69fc5b52d94198df836dc953a93,
-    type: 2}
-  muzzleFlashPrefab: {fileID: 0}
   leftEye: {fileID: 1042414856555064}
   rightEye: {fileID: 1324652810529834}
-  joinDistance: 3
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 4352
-  laserSound: {fileID: 0}
+  currentWeapon: {fileID: 114060611938936380, guid: 7b63e470a45d81b45aff50101fde7042,
+    type: 2}
 --- !u!114 &114188729025372148
 MonoBehaviour:
   m_ObjectHideFlags: 1
