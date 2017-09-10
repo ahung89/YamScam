@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Laser : MonoBehaviour {
 
@@ -119,10 +117,7 @@ public class Laser : MonoBehaviour {
 
             if (target.tag == TagNames.YAM && !yam.isBad && !yam.destroyed)
             {
-                GameManager.Instance.IncrementGoodYamLost();
                 EventBus.PublishEvent(new GoodYamLostEvent());
-                yam.targetBeast.GetComponent<Animal>().Anger();
-                yam.targetBeast.GetComponent<AudioSource>().Play();
             }
 
             if (target.tag == TagNames.SAW)

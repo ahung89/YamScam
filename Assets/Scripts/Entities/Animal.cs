@@ -16,6 +16,7 @@ public class Animal : MonoBehaviour {
     GameManager manager;
     Animator animator;
     ScreenShake screenShake;
+    AudioSource audioSource;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class Animal : MonoBehaviour {
         manager = GameManager.Instance;
         animator = GetComponent<Animator>();
         screenShake = manager.GetComponent<ScreenShake>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -55,11 +57,18 @@ public class Animal : MonoBehaviour {
         }
     }
 
+    [SubscribeGlobal]
+    public void HandleGoodYamLost(GoodYamLostEvent e)
+    {
+        Anger();
+    }
+
     public void Anger()
     {
         rendera.sprite = angryFrame;
         animator.enabled = false;
         Invoke("Unmunch", angryTime);
+        audioSource.Play();
     }
 
     void HandleAnimalDeath()

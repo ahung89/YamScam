@@ -130,18 +130,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void IncrementGoodYamLost()
+    [SubscribeGlobal]
+    public void HandleGoodYamLost(GoodYamLostEvent e)
     {
         yamsLost++;
         if (yamsLost >= goodYamLossLimit && !gameOver)
         {
-            if (SceneManager.GetActiveScene().buildIndex == 6)
-            {
-                gameOver = true;
-                gameEnded = true;
-                fadeStartTime = Time.time;
-                StartCoroutine(FadeOut());
-            }
+            gameOver = true;
+            gameEnded = true;
+            fadeStartTime = Time.time;
+            StartCoroutine(FadeOut());
         }
     }
 

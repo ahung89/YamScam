@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114664498503523568}
   - component: {fileID: 95568974673059418}
   - component: {fileID: 82079712141816630}
+  - component: {fileID: 114941309725077456}
   m_Layer: 13
   m_Name: Animal
   m_TagString: Animal
@@ -219,6 +220,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementAmount: 0.05
   secondsPerCycle: 1
+--- !u!114 &114941309725077456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489102067682814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d3efee04cbb7548ae4048a1c0988b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212451704540431324
 SpriteRenderer:
   m_ObjectHideFlags: 1
