@@ -2943,9 +2943,11 @@ MonoBehaviour:
   difficulty: 0
   difficultyMultiplier: 1
   fadeAlphaPerSec: 1
-  song: {fileID: 82137947840040586}
+  song: {fileID: 82718440778911258}
+  timer: {fileID: 114356741731608956}
+  fadePanel: {fileID: 114586091170241266}
   gameOver: 0
-  gameOverPanel: {fileID: 0}
+  gameOverPanel: {fileID: 1173515598761980}
   beeps:
   - {fileID: 82305197428790840}
   - {fileID: 82351124305087980}

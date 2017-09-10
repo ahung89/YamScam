@@ -22,15 +22,14 @@ public class GameManager : MonoBehaviour {
     int yamsLost = 0;
     public AudioSource song;
 
-    Timer timer;
+    public Timer timer;
     bool gameStarted = false;
     bool gameEnded = false;
     float fadeStartTime;
-    Image fadePanel;
+    public Image fadePanel;
 
     public bool gameOver = false;
     public GameObject gameOverPanel;
-
 
     public List<AudioSource> beeps;
     public AudioSource winSound;
@@ -48,9 +47,6 @@ public class GameManager : MonoBehaviour {
 
         Screen.SetResolution(450, 800, false);
         EventBus.Reset();
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
-        fadePanel = GameObject.Find("FadePanel").GetComponent<Image>();
-        gameOverPanel = GameObject.Find("EndGamePanel");
         fadeStartTime = Time.time;
         StartCoroutine(FadeIn());
 

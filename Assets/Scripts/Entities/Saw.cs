@@ -54,11 +54,6 @@ public class Saw : MonoBehaviour {
                 sawParent.transform.position = sawParent.transform.position - knockbackSpeed * (Vector3)dir * Time.deltaTime;
             }
         }
-
-        Vector2 ll = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-        Vector2 ur = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-
-        //sawParent.transform.position = new Vector2(Mathf.Clamp(sawParent.transform.position.x, ll.x, ur.x), Mathf.Clamp(sawParent.transform.position.y, ll.y, ur.y));
     }
 
     public void KnockBack()
