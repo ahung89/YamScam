@@ -746,6 +746,11 @@ Prefab:
       propertyPath: currentWeapon
       value: 
       objectReference: {fileID: 1266676172}
+    - target: {fileID: 82290165321528972, guid: 92ba8dbc442378b49aef3e108197cd34,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bd54cde7b5b465f4cbc94373ba107f76, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92ba8dbc442378b49aef3e108197cd34, type: 2}
   m_IsPrefabParent: 0

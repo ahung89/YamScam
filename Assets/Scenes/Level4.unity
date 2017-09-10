@@ -767,12 +767,12 @@ Prefab:
         type: 2}
       propertyPath: song
       value: 
-      objectReference: {fileID: 1332635484}
+      objectReference: {fileID: 0}
+    - target: {fileID: 82290165321528972, guid: 92ba8dbc442378b49aef3e108197cd34,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 131dfcc23f8a90a4eb35140c111e28b3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92ba8dbc442378b49aef3e108197cd34, type: 2}
   m_IsPrefabParent: 0
---- !u!82 &1332635484 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 82308987600853392, guid: 92ba8dbc442378b49aef3e108197cd34,
-    type: 2}
-  m_PrefabInternal: {fileID: 1332635483}

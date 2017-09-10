@@ -13,27 +13,22 @@ public class GameManager : MonoBehaviour {
     public int difficulty;
     public float difficultyMultiplier = 1;
     public float fadeAlphaPerSec;
-
-    int numAnimalsLost = 0;
-
-    static int numAnimalLives = 3;
-    static int goodYamLossLimit = 3;
-
-    int yamsLost = 0;
-    public AudioSource song;
-
+    public AudioClip winSound;
+    public AudioClip loseSound;
     public Timer timer;
-    bool gameStarted = false;
-    bool gameEnded = false;
-    float fadeStartTime;
     public Image fadePanel;
-
     public bool gameOver = false;
+    public AudioSource musicSource;
     public GameObject gameOverPanel;
 
-    public List<AudioSource> beeps;
-    public AudioSource winSound;
-    public AudioSource loseSound;
+    private int numAnimalsLost = 0;
+    private static int numAnimalLives = 3;
+    private static int goodYamLossLimit = 3;
+    private int yamsLost = 0;
+    private bool gameStarted = false;
+    private bool gameEnded = false;
+    private float fadeStartTime;
+    private AudioSource winLoseEffectsSource;
 
     void Awake ()
     {
@@ -50,14 +45,7 @@ public class GameManager : MonoBehaviour {
         fadeStartTime = Time.time;
         StartCoroutine(FadeIn());
 
-        winSound = transform.Find("WinSound").GetComponent<AudioSource>();
-        loseSound = transform.Find("LoseSound").GetComponent<AudioSource>();
-
-        beeps = new List<AudioSource>() {
-            transform.Find("Beep1").GetComponent<AudioSource>(),
-            transform.Find("Beep2").GetComponent<AudioSource>(),
-            transform.Find("Beep3").GetComponent<AudioSource>()
-        };
+        winLoseEffectsSource = GetComponent<AudioSource>();
     }
 
     IEnumerator FadeIn ()
@@ -83,9 +71,9 @@ public class GameManager : MonoBehaviour {
             if (gameOver)
             {
                 gameOverPanel.GetComponent<Canvas>().enabled = true;
-                song.Stop();
+                musicSource.Stop();
                 Time.timeScale = 0;
-                loseSound.Play();
+                winLoseEffectsSource.PlayOneShot(loseSound);
             }
             else
             {
@@ -125,8 +113,8 @@ public class GameManager : MonoBehaviour {
             fadeStartTime = Time.time;
             StartCoroutine(FadeOut());
 
-            song.Stop();
-            winSound.Play();
+            musicSource.Stop();
+            winLoseEffectsSource.PlayOneShot(winSound);
         }
     }
 
@@ -147,6 +135,11 @@ public class GameManager : MonoBehaviour {
     public void HandleBeastKilledEvent(BeastKilledEvent e)
     {
         IncrementLostAnimals();
+    }
+
+    public void PlaySong()
+    {
+        musicSource.Play();
     }
 
     void IncrementLostAnimals()

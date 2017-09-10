@@ -207,6 +207,7 @@ MonoBehaviour:
   munchTime: 0.2
   angryTime: 0.75
   deathScreenShakeDuration: 0.3
+  angryOink: {fileID: 8300000, guid: c26d0310489ff7e4e816f458f54bff3b, type: 3}
 --- !u!114 &114664498503523568
 MonoBehaviour:
   m_ObjectHideFlags: 1

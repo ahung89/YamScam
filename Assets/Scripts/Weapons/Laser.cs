@@ -6,23 +6,26 @@ public class Laser : MonoBehaviour {
     public float joinSpeed;
     public float timeToImpact;
     public GameObject explosionPrefab;
-    GameObject target;
-    Vector2 initialPosition;
-    float birthTime;
+    public AudioClip laserSound;
 
-    Vector2 missDir;
-    Vector2 targetPosition;
-    Renderer renderera;
+    private GameObject target;
+    private Vector2 initialPosition;
+    private float birthTime;
+
+    private Vector2 missDir;
+    private Vector2 targetPosition;
+    private Renderer renderer;
 
     // for determining behavior after joining
-    bool missed = false;
-    bool left = false;
-    bool joined = false;
-    Vector2 joinPosition;
-    Vector2 joinDir;
-    GameObject rightMissile;
+    private bool missed = false;
+    private bool left = false;
+    private bool joined = false;
+    private Vector2 joinPosition;
+    private Vector2 joinDir;
+    private GameObject rightMissile;
+    private AudioSource audioSource;
 
-    Vector2 lastFramePos;
+    private Vector2 lastFramePos;
 
     public void SetTarget(GameObject target, Vector2 joinPosition, bool left, GameObject rightMissile = null)
     {
@@ -47,6 +50,11 @@ public class Laser : MonoBehaviour {
         joinDir = (joinPosition - (Vector2)transform.position).normalized;
     }
 
+    public void PlaySound ()
+    {
+        audioSource.PlayOneShot(laserSound);
+    }
+
     void InitWithTarget()
     {
         initialPosition = transform.position;
@@ -55,7 +63,8 @@ public class Laser : MonoBehaviour {
 
     void Awake()
     {
-        renderera = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnLevelWasLoaded()
@@ -100,7 +109,7 @@ public class Laser : MonoBehaviour {
         else
         {
             transform.position += (Vector3)(missedSpeed * missDir);
-            if (!renderera.isVisible)
+            if (!renderer.isVisible)
             {
                 Destroy(gameObject);
             }

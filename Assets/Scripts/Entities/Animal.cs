@@ -11,6 +11,7 @@ public class Animal : MonoBehaviour {
     public float munchTime;
     public float angryTime;
     public float deathScreenShakeDuration = .3f;
+    public AudioClip angryOink;
 
     SpriteRenderer rendera;
     GameManager manager;
@@ -68,7 +69,7 @@ public class Animal : MonoBehaviour {
         rendera.sprite = angryFrame;
         animator.enabled = false;
         Invoke("Unmunch", angryTime);
-        audioSource.Play();
+        audioSource.PlayOneShot(angryOink);
     }
 
     void HandleAnimalDeath()

@@ -227,6 +227,7 @@ MonoBehaviour:
   timeToImpact: 0.1
   explosionPrefab: {fileID: 1557544881763272, guid: b733d7de19c968c48b7a53d9c9952a1a,
     type: 2}
+  laserSound: {fileID: 8300000, guid: 0a366ef392cb10549a84df6ec4312966, type: 3}
 --- !u!198 &198315395676731794
 ParticleSystem:
   m_ObjectHideFlags: 1

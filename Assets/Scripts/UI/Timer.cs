@@ -7,11 +7,13 @@ public class Timer : MonoBehaviour {
     public float urgencyScale;
     public int urgencyThreshold;
     public int gameStartUrgencyThreshold = 5;
+    public List<AudioClip> beeps;
 
-    int displayedTime;
-    float remainingTime;
-    RectTransform rt;
-    Text text;
+    private int displayedTime;
+    private float remainingTime;
+    private RectTransform rt;
+    private Text text;
+    private AudioSource audioSource;
 
     GameManager gameManager;
 
@@ -19,8 +21,11 @@ public class Timer : MonoBehaviour {
     {
         rt = GetComponent<RectTransform>();
         text = GetComponent<Text>();
+        audioSource = GetComponent<AudioSource>();
         displayedTime = int.Parse(text.text);
         gameManager = GameManager.Instance;
+
+        audioSource.PlayOneShot(beeps[0]);
     }
 
     public void UpdateTime (float remainingTime, bool gameStartCountdown = false)
@@ -39,11 +44,11 @@ public class Timer : MonoBehaviour {
                 int beepIndex = 3 - remainingIntTime;
                 if (beepIndex >= 0 && beepIndex <= 2)
                 {
-                    gameManager.beeps[beepIndex].Play();
+                    audioSource.PlayOneShot(beeps[beepIndex]);
                 }
                 else if (remainingIntTime == 0)
                 {
-                    gameManager.song.Play();
+                    gameManager.PlaySong();
                 }
                 text.text = remainingIntTime == 0 ? "GO" : remainingIntTime.ToString();
             }

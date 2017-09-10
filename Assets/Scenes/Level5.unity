@@ -255,7 +255,7 @@ Prefab:
         type: 2}
       propertyPath: song
       value: 
-      objectReference: {fileID: 1124484371}
+      objectReference: {fileID: 0}
     - target: {fileID: 224900774767292636, guid: 92ba8dbc442378b49aef3e108197cd34,
         type: 2}
       propertyPath: m_AnchorMin.y
@@ -436,14 +436,14 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 82290165321528972, guid: 92ba8dbc442378b49aef3e108197cd34,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 49b2bc07688123546b9e285394e746bb, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92ba8dbc442378b49aef3e108197cd34, type: 2}
   m_IsPrefabParent: 0
---- !u!82 &1124484371 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 82535841682932380, guid: 92ba8dbc442378b49aef3e108197cd34,
-    type: 2}
-  m_PrefabInternal: {fileID: 1124484370}
 --- !u!1 &1163238684
 GameObject:
   m_ObjectHideFlags: 0

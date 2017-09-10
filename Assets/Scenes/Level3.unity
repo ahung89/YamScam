@@ -387,6 +387,11 @@ Prefab:
       propertyPath: collisionMask.m_Bits
       value: 4352
       objectReference: {fileID: 0}
+    - target: {fileID: 82290165321528972, guid: 92ba8dbc442378b49aef3e108197cd34,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0371e37392277aa4da29d5beb16ecc9a, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92ba8dbc442378b49aef3e108197cd34, type: 2}
   m_IsPrefabParent: 0
