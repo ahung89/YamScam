@@ -11,6 +11,10 @@ public class FlyingYam : Yam {
 
     void Start ()
     {
+        float? inheritedSpeedX = spawner.GetComponent<YamSpawner>().GetProperty(YamProperty.FlySpeedX);
+        float? inheritedSpeedY = spawner.GetComponent<YamSpawner>().GetProperty(YamProperty.FlySpeedY);
+        speed = new Vector2(inheritedSpeedX ?? speed.x, inheritedSpeedY ?? speed.y);
+
         rb2d = GetComponent<Rigidbody2D>();
         flyStartTime = Time.time;
         rb2d.gravityScale = 0;

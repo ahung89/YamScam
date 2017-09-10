@@ -477,6 +477,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 78337546}
     m_Modifications:
+    - target: {fileID: 114733258816893292, guid: e7fc6052ea44ca14f9c9e43ae39139b0,
+        type: 2}
+      propertyPath: yamPropertyOverrides.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4320124778006134, guid: e7fc6052ea44ca14f9c9e43ae39139b0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 2.84
@@ -530,6 +535,11 @@ Prefab:
     - target: {fileID: 4320124778006134, guid: e7fc6052ea44ca14f9c9e43ae39139b0, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733258816893292, guid: e7fc6052ea44ca14f9c9e43ae39139b0,
+        type: 2}
+      propertyPath: yamPropertyOverrides.Array.data[0].value
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7fc6052ea44ca14f9c9e43ae39139b0, type: 2}

@@ -14,6 +14,7 @@ public class YamSpawner : MonoBehaviour {
     public GameObject targetBeast;
     public List<Sprite> yamSprites;
     public GameObject spawnPosObj;
+    public List<SpawnProperty> yamPropertyOverrides;
 
     private float yamWaitSeconds;
     private GameManager gameManager;
@@ -54,6 +55,24 @@ public class YamSpawner : MonoBehaviour {
     {
         yamWaitSeconds = 1 / yamsPerSecond;
         spawnAnimator.enabled = true;
+    }
+
+    public float? GetProperty(YamProperty prop)
+    {
+        if (yamPropertyOverrides == null)
+        {
+            return null;
+        }
+
+        foreach (SpawnProperty spawnProp in yamPropertyOverrides)
+        {
+            if  (spawnProp.property == prop)
+            {
+                return spawnProp.value;
+            }
+        }
+
+        return null;
     }
 
     public void SpawnYam ()
