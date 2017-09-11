@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour {
     private RectTransform rt;
     private Text text;
     private AudioSource audioSource;
+    private float initialScale;
 
     GameManager gameManager;
 
@@ -24,6 +25,8 @@ public class Timer : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         displayedTime = int.Parse(text.text);
         gameManager = GameManager.Instance;
+        initialScale = text.transform.localScale.x;
+        urgencyScale *= initialScale;
 
         audioSource.PlayOneShot(beeps[0]);
     }
@@ -63,12 +66,12 @@ public class Timer : MonoBehaviour {
         }
         if (remainingIntTime <= threshold)
         {
-            float scale = Mathf.Lerp(1, urgencyScale, remainingFract);
+            float scale = Mathf.Lerp(initialScale, urgencyScale, remainingFract);
             rt.localScale = new Vector2(scale, scale);
         }
         else
         {
-            rt.localScale = new Vector2(1, 1);
+            rt.localScale = new Vector2(initialScale, initialScale);
         }
     }
 }
