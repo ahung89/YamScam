@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance;
 
     public float remainingTime;
-    public float gameBeginCountdownTime = 3;
     public int difficulty;
     public float difficultyMultiplier = 1;
     public float fadeAlphaPerSec;
@@ -29,9 +28,12 @@ public class GameManager : MonoBehaviour {
     private bool gameEnded = false;
     private float fadeStartTime;
     private AudioSource winLoseEffectsSource;
+    private float remainingCountdownTime;
 
     void Awake ()
     {
+        remainingCountdownTime = timer.gameBeginCountdownTime;
+
         if (Instance != null)
         {
             Destroy(Instance.gameObject);
@@ -88,12 +90,12 @@ public class GameManager : MonoBehaviour {
         if (gameEnded)
             return;
 
-        if (gameBeginCountdownTime > 0)
+        if (remainingCountdownTime > 0)
         {
-            gameBeginCountdownTime -= Time.deltaTime;
-            if (gameBeginCountdownTime >= 0 && Time.deltaTime != 0)
+            remainingCountdownTime -= Time.deltaTime;
+            if (remainingCountdownTime >= 0 && Time.deltaTime != 0)
             {
-                timer.UpdateTime(gameBeginCountdownTime, true);
+                timer.UpdateTime(remainingCountdownTime, true);
             }
         }
         else

@@ -1551,8 +1551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEye: {fileID: 1042414856555064}
   rightEye: {fileID: 1324652810529834}
-  currentWeapon: {fileID: 114060611938936380, guid: 7b63e470a45d81b45aff50101fde7042,
-    type: 2}
+  currentWeapon: {fileID: 0}
 --- !u!114 &114188729025372148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1881,6 +1880,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 18ba6470ec8686249b5597f308f64098, type: 3}
   - {fileID: 8300000, guid: 7baaf5002d8eb254baa997b4e8b49fd9, type: 3}
   - {fileID: 8300000, guid: 31321dbfa392ddb4db36979d9cb86ac4, type: 3}
+  gameBeginCountdownTime: 4
 --- !u!114 &114361416712123098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2262,8 +2262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce989c9c30d2cd949b4f5f0ab1f42955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingTime: 15
-  gameBeginCountdownTime: 4
+  remainingTime: 30
   difficulty: 0
   difficultyMultiplier: 1
   fadeAlphaPerSec: 1

@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour {
     public float urgencyScale;
     public int urgencyThreshold;
-    public int gameStartUrgencyThreshold = 5;
+    public int gameStartUrgencyThreshold;
     public List<AudioClip> beeps;
+    public float gameBeginCountdownTime;
 
     private int displayedTime;
     private float remainingTime;
@@ -15,11 +16,12 @@ public class Timer : MonoBehaviour {
     private Text text;
     private AudioSource audioSource;
     private float initialScale;
-
-    GameManager gameManager;
+    private GameManager gameManager;
+    private bool firstBeep;
 
     private void Awake ()
     {
+        firstBeep = false;
         rt = GetComponent<RectTransform>();
         text = GetComponent<Text>();
         audioSource = GetComponent<AudioSource>();
@@ -28,12 +30,18 @@ public class Timer : MonoBehaviour {
         initialScale = text.transform.localScale.x;
         urgencyScale *= initialScale;
 
-        audioSource.PlayOneShot(beeps[0]);
     }
 
     public void UpdateTime (float remainingTime, bool gameStartCountdown = false)
     {
         this.remainingTime = remainingTime;
+
+        if (!firstBeep)
+        {
+            audioSource.PlayOneShot(beeps[0]);
+            firstBeep = true;
+        }
+
         int remainingIntTime = (int)Mathf.Floor(this.remainingTime);
         float remainingFract = remainingTime - remainingIntTime;
         int threshold = gameStartCountdown ? gameStartUrgencyThreshold : urgencyThreshold;
@@ -44,8 +52,8 @@ public class Timer : MonoBehaviour {
             displayedTime = remainingIntTime;
             if (gameStartCountdown)
             {
-                int beepIndex = 3 - remainingIntTime;
-                if (beepIndex >= 0 && beepIndex <= 2)
+                int beepIndex = beeps.Count - remainingIntTime;
+                if (beepIndex >= 0 && beepIndex <= beeps.Count - 1)
                 {
                     audioSource.PlayOneShot(beeps[beepIndex]);
                 }
