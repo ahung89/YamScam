@@ -1551,7 +1551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEye: {fileID: 1042414856555064}
   rightEye: {fileID: 1324652810529834}
-  currentWeapon: {fileID: 0}
+  currentWeapon: {fileID: 114060611938936380, guid: 7b63e470a45d81b45aff50101fde7042,
+    type: 2}
 --- !u!114 &114188729025372148
 MonoBehaviour:
   m_ObjectHideFlags: 1
