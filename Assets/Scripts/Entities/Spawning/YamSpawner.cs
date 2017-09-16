@@ -18,10 +18,8 @@ public class YamSpawner : MonoBehaviour {
 
     private float yamWaitSeconds;
     private GameManager gameManager;
-    private bool productionPaused;
     private Vector2 animalReplacementPosition;
     private Vector2 animalOriginalPosition;
-    private int replacementDir;
     private HeadMovement hoverScript;
     private bool replacementStarted = false;
     private Vector2 spawnPos;
@@ -40,12 +38,10 @@ public class YamSpawner : MonoBehaviour {
         if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
         {
             animalReplacementPosition = targetBeast.transform.position - new Vector3(animalReplacementDistance, 0, 0);
-            replacementDir = -1;
         }
         else
         {
             animalReplacementPosition = targetBeast.transform.position + new Vector3(animalReplacementDistance, 0, 0);
-            replacementDir = 1;
         }
         hoverScript = targetBeast.GetComponent<HeadMovement>();
     }
@@ -100,7 +96,6 @@ public class YamSpawner : MonoBehaviour {
     {
         if (targetBeast == e.beast)
         {
-            productionPaused = true;
             spawnAnimator.enabled = false;
             StartCoroutine(MoveKilledAnimalOffscreen());
             GetComponent<SpriteRenderer>().sprite = originalFrame;
@@ -146,7 +141,6 @@ public class YamSpawner : MonoBehaviour {
         else
         {
             spawnAnimator.enabled = true;
-            productionPaused = false;
         }
     }
 }

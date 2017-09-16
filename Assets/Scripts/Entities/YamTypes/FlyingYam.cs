@@ -6,7 +6,6 @@ public class FlyingYam : Yam {
 
     public float flyStartTime;
 
-    private Vector2 flyVelocity;
     private float horizontalSpeedInternal;
 
     void Start ()
