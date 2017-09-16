@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class SplineUtil {
 
-	public static List<Vector3> GenerateSpline(List<Vector3> points, int stepsPerCurve, float tension = 1)
+	public static List<SplinePoint> GenerateSpline(List<Vector3> points, int stepsPerCurve = 1, float tension = 1)
     {
-        List<Vector3> result = new List<Vector3>();
+        List<SplinePoint> result = new List<SplinePoint>();
 
         for (int i = 0; i < points.Count - 1; i++)
         {
@@ -20,16 +20,34 @@ public class SplineUtil {
                 float tSquared = t * t;
                 float tCubed = tSquared * t;
 
-                Vector3 interpolatedPoint = .5f *
-                    ((-tension * tCubed + 2 * tension * tSquared - tension * t) * prev +
-                    (2 + tSquared * (tension - 6) + tCubed * (4 - tension)) * currStart +
-                    (tCubed * (tension - 4) + tension * t - 2 * (tension - 3) * tSquared) * currEnd +
-                    (-tension * tSquared + tension * tCubed) * next);
+                Vector3 interpolatedPoint =
+                    (-.5f * tension * tCubed + tension * tSquared - .5f * tension * t) * prev +
+                    (1 + .5f * tSquared * (tension - 6) + .5f * tCubed * (4 - tension)) * currStart +
+                    (.5f * tCubed * (tension - 4) + .5f * tension * t - (tension - 3) * tSquared) * currEnd +
+                    (-.5f * tension * tSquared + .5f * tension * tCubed) * next;
 
-                result.Add(interpolatedPoint);
+                Vector3 derivative =
+                    (-1.5f * tension * tSquared + 2 * tension * t - .5f * tension) * prev +
+                    ((tension - 6) * t + 1.5f * tSquared * (4 - tension)) * currStart +
+                    (1.5f * (tension - 4) * tSquared + .5f * tension - 2 * (tension - 3) * t) * currEnd +
+                    (-tension * t + 1.5f * tension * tSquared) * next;
+
+                result.Add(new SplinePoint(interpolatedPoint, new Vector2(-derivative.y, derivative.x).normalized));
             }
         }
 
         return result;
+    }
+}
+
+public struct SplinePoint
+{
+    public Vector2 point;
+    public Vector2 tangent;
+
+    public SplinePoint(Vector2 point, Vector2 tangent)
+    {
+        this.point = point;
+        this.tangent = tangent;
     }
 }

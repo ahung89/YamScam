@@ -5,19 +5,23 @@ using System.Collections.Generic;
 [RequireComponent(typeof(MeshRenderer))]
 public class TailMesh : MonoBehaviour {
 
-    public int numVertsPerSide;
+    public int numVertsPerSection;
     public Vector2 meshDimensions;
     public List<Transform> tailSectionTransforms;
+    public bool drawGizmos;
 
     private Vector3[] verts;
     private Vector2[] uvs;
     private int[] triangles;
 
     private List<Vector3> tailCenters;
-    private List<Vector3> splinePoints;
+    private List<SplinePoint> splinePoints;
+    private Mesh mesh;
+    private int numVertsPerSide;
 
     void Awake ()
     {
+        numVertsPerSide = numVertsPerSection * (tailSectionTransforms.Count - 1);
         verts = new Vector3[2 * numVertsPerSide];
         uvs = new Vector2[2 * numVertsPerSide];
         triangles = new int[(numVertsPerSide - 1) * 6];
@@ -28,46 +32,33 @@ public class TailMesh : MonoBehaviour {
 
     private void Update ()
     {
-        DrawSpline();
+        RecalculateVerts();
     }
 
-    void DrawSpline()
+    void BuildSpline()
     {
         tailCenters.Clear();
         foreach (Transform t in tailSectionTransforms)
         {
-            tailCenters.Add(t.position); // change to localPosition once i build da mesh
+            tailCenters.Add(t.position);
         }
 
-        splinePoints = SplineUtil.GenerateSpline(tailCenters, 3);
+        splinePoints = SplineUtil.GenerateSpline(tailCenters, numVertsPerSection);
     }
 
-    private void OnDrawGizmos ()
+    void InitMesh ()
     {
-        if (splinePoints != null)
-        {
-            Gizmos.color = Color.red;
-            foreach(Vector3 point in splinePoints)
-            {
-                Gizmos.DrawCube(point, .3f * Vector3.one);
-            }
-        }
-    }
-
-    void InitMesh()
-    {
-        Mesh mesh = new Mesh();
+        mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         mesh.MarkDynamic();
 
-        float sizeIncrementY = -meshDimensions.y / numVertsPerSide;
         float uvIncrementY = 1f / (numVertsPerSide - 1);
         float width = meshDimensions.x;
 
-        for(int i = 0; i < numVertsPerSide; i++)
+        RecalculateVerts();
+
+        for (int i = 0; i < numVertsPerSide; i++)
         {
-            verts[i * 2] = new Vector3(0, i * sizeIncrementY, 0);
-            verts[i * 2 + 1] = new Vector3(width, i * sizeIncrementY, 0);
             uvs[i * 2] = new Vector2(0, 1f - i * uvIncrementY);
             uvs[i * 2 + 1] = new Vector2(1, 1f - i * uvIncrementY);
 
@@ -87,8 +78,41 @@ public class TailMesh : MonoBehaviour {
             }
         }
 
-        mesh.vertices = verts;
         mesh.uv = uvs;
         mesh.triangles = triangles;
+    }
+
+    void RecalculateVerts()
+    {
+        BuildSpline();
+
+        float tangentScale = meshDimensions.x / 2f;
+
+        for (int i = 0; i < numVertsPerSide; i++)
+        {
+            Vector2 transformedPoint = transform.InverseTransformPoint(splinePoints[i].point);
+            Vector2 transformedTangent = transform.InverseTransformVector(splinePoints[i].tangent);
+
+            verts[i * 2] = transformedPoint - transformedTangent * tangentScale;
+            verts[i * 2 + 1] = transformedPoint + transformedTangent * tangentScale;
+        }
+
+        mesh.vertices = verts;
+    }
+
+    private void OnDrawGizmos ()
+    {
+        if (drawGizmos)
+        {
+            Gizmos.color = Color.green;
+
+            if (splinePoints != null)
+            {
+                foreach (SplinePoint point in splinePoints)
+                {
+                    Gizmos.DrawLine(point.point - .15f * point.tangent, point.point + .15f * point.tangent);
+                }
+            }
+        }
     }
 }
