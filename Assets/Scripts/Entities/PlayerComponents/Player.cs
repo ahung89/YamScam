@@ -24,7 +24,15 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            currentWeapon.HandleMouseDown();
+            if (!TailController.Instance.HandleMouseDown())
+            {
+                currentWeapon.HandleMouseDown();
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            TailController.Instance.HandleMouseUp();
         }
     }
 }
