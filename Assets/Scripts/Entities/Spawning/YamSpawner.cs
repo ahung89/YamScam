@@ -9,6 +9,7 @@ public class YamSpawner : MonoBehaviour {
     public float animalReplacementDistance;
     public float animalReplacementSpeed;
     public float replacementWaitTime;
+	public List<string> yamSequenceList;
     public Sprite originalFrame;
     public GameObject yamPrefab;
     public GameObject targetBeast;
@@ -26,6 +27,8 @@ public class YamSpawner : MonoBehaviour {
     private bool replacementStarted = false;
     private Vector2 spawnPos;
     private Animator spawnAnimator;
+	private List<YamType> yamSequence;
+	private int yamIndex;
 
     void Awake()
     {
@@ -36,6 +39,9 @@ public class YamSpawner : MonoBehaviour {
         spawnAnimator.speed = .75f;
         spawnAnimator.enabled = false;
         spawnPos = spawnPosObj.transform.position;
+
+		this.yamSequence = YamSequencer.GenerateSequence(yamSequenceList);
+		this.yamIndex = 0;
 
         if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
         {
@@ -75,14 +81,14 @@ public class YamSpawner : MonoBehaviour {
         return null;
     }
 
-    public void SpawnYam ()
+    public void SpawnYam()
     {
-        bool spawnBadYam = Random.Range(0, 100) < badYamSpawnChance;
-        GameObject spawnedYam = Instantiate(yamPrefab, spawnPos, Quaternion.identity);
+		GameObject spawnedYam = Instantiate(yamPrefab, spawnPos, Quaternion.identity);
         Yam yam = spawnedYam.GetComponent<Yam>();
-        yam.isBad = spawnBadYam;
+		int index = (this.yamIndex++) % this.yamSequence.Count;
+		yam.isBad = this.yamSequence[index] == YamType.BadYam;
 
-        if (spawnBadYam)
+		if (yam.isBad)
         {
             DecorateBadYam(yam.gameObject);
         }
