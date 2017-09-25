@@ -24,13 +24,13 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!TailController.Instance.HandleMouseDown())
+            if (TailController.Instance == null || !TailController.Instance.HandleMouseDown())
             {
                 currentWeapon.HandleMouseDown();
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && TailController.Instance != null)
         {
             TailController.Instance.HandleMouseUp();
         }
