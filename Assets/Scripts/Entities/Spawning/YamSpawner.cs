@@ -81,9 +81,9 @@ public class YamSpawner : MonoBehaviour {
     {
 		GameObject spawnedYam = Instantiate(yamPrefab, spawnPos, Quaternion.identity);
         Yam yam = spawnedYam.GetComponent<Yam>();
-		int index = (this.yamIndex++) % this.yamSequence.Count;
-		yam.isBad = this.yamSequence[index] == YamType.BadYam;
 
+		int index = (this.yamIndex++) % this.yamSequence.Count;
+		yam.isBad = this.IsBadYam(this.yamSequence[index]);
 		if (yam.isBad)
         {
             DecorateBadYam(yam.gameObject);
@@ -92,7 +92,22 @@ public class YamSpawner : MonoBehaviour {
         yam.Init(gameObject, targetBeast);
     }
 
-    void DecorateBadYam(GameObject yam)
+	private bool IsBadYam(YamType yamType)
+	{
+		switch (yamType) 
+		{
+		case YamType.GoodYam:
+			return false;
+		case YamType.BadYam:
+			return true;
+		case YamType.RandomYam:
+			return (System.DateTime.UtcNow.Millisecond % 2 == 0);
+		default:
+			return false;
+		}
+	}
+
+    private void DecorateBadYam(GameObject yam)
     {
         yam.GetComponent<SpriteRenderer>().sprite = yamSprites[Random.Range(0, yamSprites.Count)];
     }
