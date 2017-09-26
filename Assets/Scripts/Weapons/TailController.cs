@@ -8,6 +8,8 @@ public class TailController : MonoBehaviour {
     public bool controllingTail;
     public GameObject tailEnd;
 
+    private Rigidbody2D tailEndRigidbody;
+
     void Awake()
     {
         if (Instance != null)
@@ -17,6 +19,7 @@ public class TailController : MonoBehaviour {
 
         Instance = this;
         controllingTail = false;
+        tailEndRigidbody = tailEnd.GetComponent<Rigidbody2D>();
     }
 
     public LayerMask tailCollisionMask;
@@ -24,7 +27,7 @@ public class TailController : MonoBehaviour {
 	void Update () {
         if (controllingTail)
         {
-            tailEnd.GetComponent<Rigidbody2D>().MovePosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            tailEndRigidbody.MovePosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 

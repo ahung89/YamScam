@@ -753,6 +753,10 @@ Prefab:
       propertyPath: menuManager
       value: 
       objectReference: {fileID: 2005639904}
+    - target: {fileID: 1594035669968766, guid: 922422f79bd68c94e924d3eb6544ad19, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 922422f79bd68c94e924d3eb6544ad19, type: 2}
   m_IsPrefabParent: 0
@@ -1068,7 +1072,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2f010b9fa3fb545aa4524251ba5ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuManager: {fileID: 2005639904}
   worldMapMenu: {fileID: 1594035669968766, guid: 922422f79bd68c94e924d3eb6544ad19,
     type: 2}
 --- !u!1 &2005639899
