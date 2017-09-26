@@ -14,7 +14,7 @@ public class JacketMenu : MonoBehaviour {
 
     public void StartGame ()
     {
-        SceneManager.LoadSceneAsync(0);
+		SceneManager.LoadSceneAsync(PlayerDataManager.LevelProgress);
     }
 
     public void ExitGame ()
