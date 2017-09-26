@@ -79,7 +79,9 @@ public class GameManager : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(2);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+				int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
+				SceneManager.LoadScene(nextLevel);
+				PlayerDataManager.LevelProgress = nextLevel;
             }
         }
     }
