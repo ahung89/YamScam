@@ -20,10 +20,23 @@ public class MenuManager : MonoBehaviour {
 
         Instance = this;
         panelStack = new Stack<GameObject>();
-        nonStartingMenus.ForEach(Destroy);
+        nonStartingMenus.ForEach(m => {
+            ZoomablePanel zp = m.GetComponent<ZoomablePanel>();
+            if (zp != null)
+            {
+                zp.GetComponent<Image>().raycastTarget = false;
+                zp.enabled = false;
+            }
+        });
     }
 
-    public void PushPanel (GameObject panelPrefab, bool zoom = false)
+    public void ZoomIntoPanel(ZoomablePanel panel)
+    {
+        panel.enabled = true;
+        panelStack.Push(panel.gameObject);
+    }
+
+    public void PushPanel (GameObject panelPrefab)
     {
         GameObject panel = Instantiate(panelPrefab, transform);
 
@@ -35,7 +48,7 @@ public class MenuManager : MonoBehaviour {
         panelStack.Push(panel);
     }
 
-    public void PopPanel(bool zoom = false)
+    public void PopPanel()
     {
         GameObject poppedPanel = panelStack.Pop();
         Destroy(poppedPanel);

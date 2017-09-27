@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class JacketMenu : MonoBehaviour {
 
-    public GameObject worldMapMenu;
+    public ZoomablePanel worldMapMenu;
 
     public void TransitionToWorldMap()
     {
-        MenuManager.Instance.PushPanel(worldMapMenu);
+        MenuManager.Instance.ZoomIntoPanel(worldMapMenu);
     }
 
     public void StartGame ()
