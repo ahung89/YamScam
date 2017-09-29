@@ -10,6 +10,8 @@ public class JacketMenu : MonoBehaviour {
     public void TransitionToWorldMap()
     {
         MenuManager.Instance.ZoomIntoPanel(worldMapMenu);
+
+		// TODO: callback to load WorldMapScene after jacket map is fully zoomed
     }
 
     public void StartGame ()
