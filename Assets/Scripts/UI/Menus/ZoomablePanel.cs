@@ -8,20 +8,26 @@ public class ZoomablePanel : MonoBehaviour {
     public float growthPerFrame;
 
     private RectTransform rt;
+    private Vector2 smallScale;
     private Rect canvasRect;
+    private CanvasGroup canvasGroup;
 
     private void Awake ()
     {
         rt = GetComponent<RectTransform>();
         canvasRect = zoomSource.GetComponentInParent<Canvas>().pixelRect;
+        canvasGroup = GetComponent<CanvasGroup>();
 
-        rt.localScale = new Vector2(zoomSource.rect.width / rt.rect.width, zoomSource.rect.height / rt.rect.height);
+        smallScale = new Vector2(zoomSource.rect.width / rt.rect.width, zoomSource.rect.height / rt.rect.height);
+        rt.localScale = smallScale;
         rt.position = zoomSource.position;
         rt.pivot = FindPivot();
 
         // Changing the pivot automatically moves the box, so re-adjust the position.
         rt.position = (Vector2)zoomSource.position + (new Vector2(rt.pivot.x * rt.rect.width * rt.localScale.x, rt.pivot.y * rt.rect.height * rt.localScale.y)
             - new Vector2(rt.rect.width * rt.localScale.x / 2, rt.rect.height * rt.localScale.y / 2));
+
+        SetPanelInteractable(false);
     }
 
     Vector2 FindPivot()
@@ -44,12 +50,33 @@ public class ZoomablePanel : MonoBehaviour {
             (y - (rt.transform.position.y - rectExtentY)) / rectHeight);
     }
 
-    void Update ()
+    public void ZoomIn()
     {
-        if ((Vector2)rt.localScale != Vector2.one)
+        StartCoroutine(Zoom());
+        SetPanelInteractable(true);
+    }
+
+    public void ZoomOut()
+    {
+        StartCoroutine(Zoom(false));
+        SetPanelInteractable(false);
+    }
+
+    IEnumerator Zoom(bool zoomIn = true)
+    {
+        Vector2 lowerBound = zoomIn ? Vector2.zero : smallScale;
+
+        while ((Vector2)rt.localScale != (zoomIn ? Vector2.one : smallScale))
         {
-            float growth = Time.deltaTime * growthPerFrame;
-            rt.localScale = new Vector3(Mathf.Min(1, rt.localScale.x + growth), Mathf.Min(1, rt.localScale.y + growth));
+            float growth = Time.deltaTime * growthPerFrame * (zoomIn ? 1 : -1);
+            rt.localScale = new Vector3(Mathf.Clamp(rt.localScale.x + growth, lowerBound.x, 1), Mathf.Clamp(rt.localScale.y + growth, lowerBound.y, 1));
+            yield return null;
         }
+    }
+
+    void SetPanelInteractable (bool enabled)
+    {
+        canvasGroup.interactable = enabled;
+        canvasGroup.blocksRaycasts = enabled;
     }
 }

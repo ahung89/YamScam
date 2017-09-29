@@ -4,15 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class JacketMenu : MonoBehaviour {
-
-    public ZoomablePanel worldMapMenu;
-
-    public void TransitionToWorldMap()
-    {
-        MenuManager.Instance.ZoomIntoPanel(worldMapMenu);
-
-		// TODO: callback to load WorldMapScene after jacket map is fully zoomed
-    }
+    // TODO: callback to load WorldMapScene after jacket map is fully zoomed
 
     public void StartGame ()
     {
