@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZoomablePanel : MonoBehaviour {
 
     public RectTransform zoomSource;
-    public float growthPerFrame;
+    public float growthPerFrame = 1.25f;
 
     private RectTransform rt;
     private Vector2 smallScale;
@@ -24,8 +24,8 @@ public class ZoomablePanel : MonoBehaviour {
         rt.pivot = FindPivot();
 
         // Changing the pivot automatically moves the box, so re-adjust the position.
-        rt.position = (Vector2)zoomSource.position + (new Vector2(rt.pivot.x * rt.rect.width * rt.localScale.x, rt.pivot.y * rt.rect.height * rt.localScale.y)
-            - new Vector2(rt.rect.width * rt.localScale.x / 2, rt.rect.height * rt.localScale.y / 2));
+        rt.position = (Vector2)zoomSource.position + (new Vector2(rt.pivot.x * rt.rect.width * rt.lossyScale.x, rt.pivot.y * rt.rect.height * rt.lossyScale.y)
+            - new Vector2(rt.rect.width * rt.lossyScale.x / 2, rt.rect.height * rt.lossyScale.y / 2));
 
         SetPanelInteractable(false);
     }
@@ -37,17 +37,20 @@ public class ZoomablePanel : MonoBehaviour {
         float rectExtentX = rectWidth * .5f;
         float rectExtentY = rectHeight * .5f;
 
+        RectTransform parentRt = rt.transform.parent.GetComponent<RectTransform>();
+        Vector2 localPoint = (Vector2)parentRt.InverseTransformPoint(rt.transform.position)
+            + new Vector2(parentRt.rect.width / 2f, parentRt.rect.height / 2f);
+
         Vector2 innerSize = new Vector2(rectWidth, rectHeight);
-        Vector2 outerSize = canvasRect.size;
-        Vector2 innerMax = new Vector2(rt.transform.position.x + rectExtentX, 
-            rt.transform.position.y + rectExtentY);
-        Vector2 outerMax = canvasRect.size;
+        Vector2 outerSize = parentRt.rect.size;
+        Vector2 innerMax = new Vector2(localPoint.x + rectExtentX,
+            localPoint.y + rectExtentY);
+        Vector2 outerMax = parentRt.rect.size;
 
         float x = (innerSize.x * outerMax.x - outerSize.x * innerMax.x) / (innerSize.x - outerSize.x);
         float y = (innerSize.y * outerMax.y - outerSize.y * innerMax.y) / (innerSize.y - outerSize.y);
 
-        return new Vector2((x - (rt.transform.position.x - rectExtentX)) / rectWidth,
-            (y - (rt.transform.position.y - rectExtentY)) / rectHeight);
+        return new Vector2((x - (localPoint.x - rectExtentX)) / rectWidth, (y - (localPoint.y - rectExtentY)) / rectHeight);
     }
 
     public void ZoomIn()
