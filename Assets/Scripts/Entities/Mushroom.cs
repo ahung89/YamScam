@@ -1,88 +1,64 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class Mushroom : MonoBehaviour {
-
     public GameObject target;
-    public GameObject pseudoGizmo;
-    public GameObject testProjectile;
 
-    public float launchSpeed;
-    public float heightModifier = .7f;
+    public float height = 1.5f;
+    private static int numDashes = 30;
 
-    public float initialVelocityY;
+    private float adjustedHeight;
+    private float trajectoryDuration;
 
-    private Vector2 transformedTarget;
-    private float midpointX;
-
-    private float a;
-    private float k;
-    private float startTime;
-
-    private void Awake ()
+    private void OnTriggerEnter2D (Collider2D collider)
     {
-        startTime = Time.time;
-    }
-
-    private void Update ()
-    {
-        if (target == null)
+        if (!target)
         {
             return;
         }
 
-        transformedTarget = transform.InverseTransformPoint(target.transform.position);
-        float velX = GetVelocityX();
-        CalculateMidpoint();
-        CalculateArcHeight();
+        collider.transform.position = transform.position;
+        collider.GetComponent<Rigidbody2D>().velocity = CalculateLaunchVelocity();
+    }
 
-        Vector2 vertex = new Vector2(transform.position.x + midpointX, transform.position.y + k);
-        pseudoGizmo.transform.position = vertex;
+    Vector2 CalculateLaunchVelocity ()
+    {
+        Vector2 transformedPoint = transform.InverseTransformPoint(target.transform.position);
+        adjustedHeight = Mathf.Max(0, transformedPoint.y) + height;
 
-        float t = Time.time - startTime;
-        float x = t * velX;
-        Vector2 offset = new Vector2(x, SolveCurrentHeight(x));
+        float displacementY = transformedPoint.y;
+        float displacementX = transformedPoint.x;
 
-        testProjectile.transform.position = (Vector2)transform.position + offset;
+        trajectoryDuration = Mathf.Sqrt(-2 * adjustedHeight / Physics.gravity.y) + Mathf.Sqrt(2 * (displacementY - adjustedHeight) / Physics.gravity.y);
 
-        if (x > transformedTarget.x)
+        float velY = Mathf.Sqrt(-2 * Physics.gravity.y * adjustedHeight);
+        float velX = displacementX / (Mathf.Sqrt(-2 * adjustedHeight / Physics.gravity.y) + Mathf.Sqrt(2 * (displacementY - adjustedHeight) / Physics.gravity.y));
+        return new Vector2(velX, velY);
+    }
+
+    private void OnDrawGizmos ()
+    {
+        bool selected = Selection.Contains(gameObject);
+        Color col = selected ? Color.green : Color.grey;
+        col.a = selected ? 1 : .5f;
+
+        Vector2 launchVelocity = CalculateLaunchVelocity();
+        Vector3 prevPoint = transform.position;
+
+        for (int i = 1; i < numDashes; i++)
         {
-            startTime = Time.time;
+            float t = i / (float)numDashes * trajectoryDuration;
+            Vector2 displacement = .5f * Physics.gravity.y * Vector2.up * t * t + launchVelocity * t;
+            Vector3 point = (Vector2)transform.position + displacement;
+
+            if (i % 2 != 0)
+            {
+                Debug.DrawLine(prevPoint, point, col);
+            }
+
+            prevPoint = point;
         }
-    }
-
-    void CalculateMidpoint()
-    {
-        if (transformedTarget.y == 0)
-        {
-            midpointX = transformedTarget.x / 2;
-            return;
-        }
-        midpointX = transformedTarget.y <= 0 ?
-            Mathf.Min(.95f, heightModifier) * transformedTarget.x / 2 : Mathf.Max(.05f, 1 - heightModifier) * transformedTarget.x / 2 + transformedTarget.x / 2;
-    }
-
-    void CalculateArcHeight()
-    {
-        float q = transformedTarget.x;
-        float r = transformedTarget.y;
-
-        float h = midpointX;
-        float n = q - h;
-
-        a = -r / (h * h - n * n);
-
-        k = h == n ? Mathf.Clamp(transformedTarget.x * .75f, .5f, 1.5f) : r - a * n * n;
-    }
-
-    float SolveCurrentHeight(float x)
-    {
-        return a * Mathf.Pow((x - midpointX), 2) + k;
-    }
-
-    float GetVelocityX()
-    {
-        return launchSpeed * Mathf.Cos(Mathf.Atan2(transformedTarget.y, transformedTarget.x));
     }
 }
