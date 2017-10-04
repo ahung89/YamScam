@@ -31,25 +31,25 @@ public class YamSpawner : MonoBehaviour {
     void Awake()
     {
         gameManager = GameManager.Instance;
-        yamsPerSecond = gameManager.difficultyMultiplier;
-        animalOriginalPosition = targetBeast.transform.position;
+        yamsPerSecond = .1f;
+        //animalOriginalPosition = targetBeast.transform.position;
         spawnAnimator = GetComponent<Animator>();
         spawnAnimator.speed = .75f;
-        spawnAnimator.enabled = false;
+        spawnAnimator.enabled = true;
         spawnPos = spawnPosObj.transform.position;
 
 		this.yamSequence = YamSequencer.GenerateSequence(yamSequenceList);
 		this.yamIndex = 0;
 
-        if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
-        {
-            animalReplacementPosition = targetBeast.transform.position - new Vector3(animalReplacementDistance, 0, 0);
-        }
-        else
-        {
-            animalReplacementPosition = targetBeast.transform.position + new Vector3(animalReplacementDistance, 0, 0);
-        }
-        hoverScript = targetBeast.GetComponent<HeadMovement>();
+        //if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
+        //{
+        //    animalReplacementPosition = targetBeast.transform.position - new Vector3(animalReplacementDistance, 0, 0);
+        //}
+        //else
+        //{
+        //    animalReplacementPosition = targetBeast.transform.position + new Vector3(animalReplacementDistance, 0, 0);
+        //}
+        //hoverScript = targetBeast.GetComponent<HeadMovement>();
     }
 
     [SubscribeGlobal]

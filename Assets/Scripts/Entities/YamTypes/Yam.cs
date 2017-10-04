@@ -4,6 +4,7 @@ public class Yam : MonoBehaviour {
     public GameObject explosion;
     public bool destroyed = false;
     public bool isBad = false;
+    public bool tracked = false;
     public GameObject targetBeast;
 
     protected Rigidbody2D rb2d;
