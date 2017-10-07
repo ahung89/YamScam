@@ -32,7 +32,6 @@ public class YamSpawner : MonoBehaviour {
     {
         gameManager = GameManager.Instance;
         yamsPerSecond = .1f;
-        //animalOriginalPosition = targetBeast.transform.position;
         spawnAnimator = GetComponent<Animator>();
         spawnAnimator.speed = .75f;
         spawnAnimator.enabled = true;
@@ -41,15 +40,24 @@ public class YamSpawner : MonoBehaviour {
 		this.yamSequence = YamSequencer.GenerateSequence(yamSequenceList);
 		this.yamIndex = 0;
 
-        //if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
-        //{
-        //    animalReplacementPosition = targetBeast.transform.position - new Vector3(animalReplacementDistance, 0, 0);
-        //}
-        //else
-        //{
-        //    animalReplacementPosition = targetBeast.transform.position + new Vector3(animalReplacementDistance, 0, 0);
-        //}
-        //hoverScript = targetBeast.GetComponent<HeadMovement>();
+        if (targetBeast != null)
+        {
+            ConfigureAnimalPosition();
+        }
+    }
+
+    void ConfigureAnimalPosition()
+    {
+        animalOriginalPosition = targetBeast.transform.position;
+        if (Camera.main.WorldToViewportPoint(targetBeast.transform.position).x < .5f)
+        {
+            animalReplacementPosition = targetBeast.transform.position - new Vector3(animalReplacementDistance, 0, 0);
+        }
+        else
+        {
+            animalReplacementPosition = targetBeast.transform.position + new Vector3(animalReplacementDistance, 0, 0);
+        }
+        hoverScript = targetBeast.GetComponent<HeadMovement>();
     }
 
     [SubscribeGlobal]

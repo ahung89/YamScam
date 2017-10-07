@@ -12,5 +12,5 @@ public struct SpawnProperty {
 
 public enum YamProperty
 {
-    FlySpeedX, FlySpeedY, ElevateSpeedX, ElevateSpeedY
+    FlySpeedX, FlySpeedY, ElevateSpeedX, ElevateSpeedY, SinAmplitude
 }
