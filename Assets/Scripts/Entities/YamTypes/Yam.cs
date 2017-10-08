@@ -30,5 +30,10 @@ public class Yam : MonoBehaviour {
     {
         destroyed = true;
         Destroy(gameObject);
+
+        if (this.isBad) 
+        {
+            PlayerDataManager.YamScore++;
+        }
     }
 }
