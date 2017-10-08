@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class Mushroom : MonoBehaviour {
@@ -63,6 +65,7 @@ public class Mushroom : MonoBehaviour {
         return new Vector2(vec.x * Mathf.Cos(angle) - vec.y * Mathf.Sin(angle), vec.x * Mathf.Sin(angle) + vec.y * Mathf.Cos(angle));
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos ()
     {
         bool selected = Selection.Contains(gameObject);
@@ -96,6 +99,7 @@ public class Mushroom : MonoBehaviour {
             }
 
             prevPoint = point;
+            }
         }
-    }
+#endif
 }
