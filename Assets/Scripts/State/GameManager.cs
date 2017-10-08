@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour {
 				int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
 				SceneManager.LoadScene(nextLevel);
 				PlayerDataManager.LevelProgress = nextLevel;
+                GameCenterUtil.ReportScore(PlayerDataManager.YamScore, GameCenterUtil.YamsGameLeaderBoardID);
             }
         }
     }
