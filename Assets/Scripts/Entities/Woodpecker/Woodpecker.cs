@@ -2,14 +2,15 @@
 
 public class Woodpecker : MonoBehaviour {
 
+    // body
     private GameObject joint = null;
     private GameObject body = null;
     private PolygonCollider2D bodyCollider = null;
 
+    // transform
     private bool isBodyInRotation = false;
     private bool isRotationCounterclockwise = true;
     private float totalSecondsElapsed = 0f;
-
     private const float SecondsToRotate = 0.3f;
     private const float DegreesToRotate = 65f;
     private const float DegreesPerSecond = DegreesToRotate / SecondsToRotate;
